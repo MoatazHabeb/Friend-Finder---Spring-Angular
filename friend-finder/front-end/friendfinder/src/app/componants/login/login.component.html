@@ -1,0 +1,30 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="welcome-text">Log In</h2>
+    <form class="login-form">
+      <div class="input-group">
+        <span class="input-icon">📧</span>
+        <input type="email" placeholder="Email" required #email>
+      </div>
+      <div class="input-group">
+        <span class="input-icon">🔒</span>
+        <input type="password" placeholder="Password" required #password id="loginPassword">
+        <span class="toggle-password" (click)="togglePasswordVisibility('loginPassword')">👁️</span>
+      </div>
+      <button class="login-btn" (click)="login(email.value, password.value)">Log In</button>
+      <div  class="nav-item nav-link active">
+        <a (click)="signup()" class="clickable-link">Signup</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--<app-card *ngIf="isUserLogin()"></app-card>-->
+<!--<div *ngIf="isUserLogin()" class="nav-item nav-link active"><a (click)="logOut()"class="logout-btn">LogOut</a></div>-->
+<!--<div *ngIf="!isUserLogin()" class="nav-item nav-link active">-->
+<!--  <a (click)="login()" class="clickable-link">Login</a>-->
+<!--</div>-->
+
+
+<p class="notification error notificationAr" *ngIf="messageAr != ''">{{messageAr}}</p>
+<p class="notification error notificationEn" *ngIf="messageEn != ''">{{messageEn}}</p>
