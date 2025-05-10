@@ -1,0 +1,1 @@
+A full-stack web application that allows users to search for and connect with new friends based on shared interests, location, and activity preferences. Built using Spring Boot for the backend API and Angular for the frontend interface.
