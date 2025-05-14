@@ -8,7 +8,7 @@ import {Contact} from "../model/contact";
 })
 export class ContactService {
 
-  private apiUrl = 'http://localhost:4040/Contact/saveMessage';  // API endpoint
+  private apiUrl = 'http://localhost:4050/Contact/saveMessage';  // API endpoint
 
   constructor(private http: HttpClient) { }
 

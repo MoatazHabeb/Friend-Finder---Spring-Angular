@@ -1,0 +1,89 @@
+.profile-image-wrapper {
+  display: inline-block;
+  border-radius: 50%;
+  padding: 4px;
+  background-color: #ffffff;
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.profile-image-wrapper:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+.timeline-cover {
+  background-image: url('/assets/images/wallhaven-vmv5kl-fotor-2025051322591.png');
+  background-size: cover;
+  background-position: top left ; /* 💡 Shifts background down */
+  height: 280px;
+  position: relative;
+  border-bottom: 4px solid #ccc;
+}
+
+
+/*Change Photo*/
+.change-photo-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+  position: relative;
+  right: 370px;
+  top: 100px;
+}
+
+.change-photo-btn:hover {
+  background-color: #0056b3;
+}
+
+.change-photo-btn input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+
+
+/*All buttom*/
+.custom-tabs .nav-link {
+  font-weight: 500;
+  color: #555;
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease-in-out;
+  padding: 10px 20px;
+  border-radius: 0;
+}
+
+.custom-tabs .nav-link:hover {
+  color: #007bff;
+  border-bottom: 3px solid #007bff;
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+.custom-tabs .nav-link.active {
+  color: #007bff;
+  font-weight: 600;
+  border-bottom: 3px solid #007bff;
+  background-color: transparent;
+}

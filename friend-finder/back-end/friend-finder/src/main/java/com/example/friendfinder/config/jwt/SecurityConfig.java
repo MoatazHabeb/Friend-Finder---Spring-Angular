@@ -40,8 +40,10 @@ public class SecurityConfig {
 //                        .requestMatchers(HttpMethod.POST, "/client/create-client").permitAll()
 //                        .anyRequest().authenticated()
                 api -> api
+                        .requestMatchers("/uploads/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/create-user").permitAll()
+
                         .anyRequest().authenticated()
         );
 
@@ -53,10 +55,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:2030"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:2010"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-
+        configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

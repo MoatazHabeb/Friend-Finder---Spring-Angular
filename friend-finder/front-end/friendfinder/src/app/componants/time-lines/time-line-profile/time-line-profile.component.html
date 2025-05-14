@@ -1,115 +1,50 @@
 <div class="timeline-cover">
-  <!-- Timeline Menu for Large Screens -->
-  <div class="timeline-nav-bar hidden-sm hidden-xs">
+  <div class="container">
+    <div class="row align-items-center py-4">
+      <!-- Profile Image -->
+      <div class="col-md-2 text-center">
+        <div class="profile-image-wrapper">
+          <img [src]="imageUrl"
+
+               class="profile-image">
+        </div>
+      </div>
+      <!-- Username -->
+      <div class="col-md-6">
+        <h2 class="mb-0">{{ user?.fullname || user?.username || 'User' }}</h2>
+        <p class="text-muted">{{ followerCount }} followers</p>
+      </div>
+
+
+      <<!-- Upload Image Option (optional) -->
+      <div class="col-md-4 text-start">
+        <label class="change-photo-btn">
+          <i class="bi bi-camera me-1"></i> Change Photo
+          <input type="file"
+                 (change)="onFileSelected($event)"
+                 accept="image/*"
+                 hidden>
+        </label>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
     <div class="row">
-      <div class="col-md-3">
-        <div class="profile-info text-center">
-          <!-- Loading state -->
-          <div *ngIf="isLoading" class="spinner-border text-primary" role="status" style="position: absolute; left: 50%; top: 45%; transform: translate(-50%, -50%); z-index: 10;">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-
-          <div class="profile-image-container" style="position: relative; width: 150px; height: 150px; margin: 0 auto; border-radius: 50%; overflow: hidden;">
-            <img [src]="imageUrl"
-                 alt="Profile Photo"
-                 class="img-responsive profile-photo"
-                 style="width: 100%; height: 100%; object-fit: cover;"
-                 (error)="onImageError($event)">
-          </div>
-
-          <h4 *ngIf="user">{{ user.fullname || user.username || 'User' }}</h4>
-
-          <!-- File input with better styling -->
-          <label class="btn btn-primary mt-2">
-            Change Photo
-            <input type="file"
-                   (change)="onFileSelected($event)"
-                   accept="image/jpeg,image/png,image/jpg"
-                   style="display: none;">
-          </label>
-
-          <!-- Upload progress bar -->
-          <div *ngIf="uploadProgress > 0 && uploadProgress < 100" class="progress mt-2">
-            <div class="progress-bar" role="progressbar" [style.width.%]="uploadProgress" aria-valuemin="0" aria-valuemax="100">
-              {{uploadProgress}}%
-            </div>
-          </div>
-
-          <!-- Upload status message -->
-          <div *ngIf="uploadMessage" class="alert mt-2"
-               [class.alert-success]="uploadMessage.includes('success')"
-               [class.alert-danger]="uploadMessage.includes('failed') || (uploadMessage.includes('error') && !uploadMessage.includes('successful'))"
-               [class.alert-info]="uploadMessage.includes('Uploading')">
-            {{ uploadMessage }}
-          </div>
-        </div>
-      </div>
-      <div class="col-md-9">
-        <ul class="list-inline profile-menu">
-          <li><a routerLink="/timeline" routerLinkActive="active">Timeline</a></li>
-          <li><a routerLink="/timeline-about" routerLinkActive="active">About</a></li>
-          <li><a routerLink="/timeline-album" routerLinkActive="active">Album</a></li>
-          <li><a routerLink="/timeline-friends" routerLinkActive="active">Friends</a></li>
+      <div class="col-12">
+        <ul class="nav nav-tabs justify-content-center custom-tabs">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/timeline" routerLinkActive="active">Timeline</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/timeline-about" routerLinkActive="active">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/timeline-album" routerLinkActive="active">Album</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/timeline-friends" routerLinkActive="active">Friends</a>
+          </li>
         </ul>
-        <ul class="follow-me list-inline">
-          <li>{{ followerCount }} people follow you</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Timeline Menu for Small Screens -->
-  <div class="navbar-mobile hidden-lg hidden-md">
-    <div class="profile-info text-center">
-      <div class="profile-image-container" style="position: relative; width: 100px; height: 100px; margin: 0 auto; border-radius: 50%; overflow: hidden;">
-        <img [src]="imageUrl"
-             alt="Profile Photo"
-             style="width: 100%; height: 100%; object-fit: cover;"
-             (error)="onImageError($event)">
-      </div>
-      <h4>{{ user?.fullname || user?.username || 'User' }}</h4>
-
-      <!-- Mobile upload button -->
-      <label class="btn btn-primary btn-sm mt-2">
-        Change Photo
-        <input type="file"
-               (change)="onFileSelected($event)"
-               accept="image/jpeg,image/png,image/jpg"
-               style="display: none;">
-      </label>
-
-      <!-- Mobile progress bar -->
-      <div *ngIf="uploadProgress > 0 && uploadProgress < 100" class="progress mt-2">
-        <div class="progress-bar" role="progressbar" [style.width.%]="uploadProgress" aria-valuemin="0" aria-valuemax="100">
-          {{uploadProgress}}%
-        </div>
-      </div>
-
-      <!-- Mobile upload message -->
-      <div *ngIf="uploadMessage" class="alert mt-2 small"
-           [class.alert-success]="uploadMessage.includes('success')"
-           [class.alert-danger]="uploadMessage.includes('failed') || (uploadMessage.includes('error') && !uploadMessage.includes('successful'))"
-           [class.alert-info]="uploadMessage.includes('Uploading')">
-        {{ uploadMessage }}
-      </div>
-    </div>
-    <div class="mobile-menu">
-      <ul class="list-inline">
-        <li><a routerLink="/timeline" routerLinkActive="active">Timeline</a></li>
-        <li><a routerLink="/timeline-about" routerLinkActive="active">About</a></li>
-        <li><a routerLink="/timeline-album" routerLinkActive="active">Album</a></li>
-        <li><a routerLink="/timeline-friends" routerLinkActive="active">Friends</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<!-- Display any user data in a clean format if needed -->
-<div class="container" *ngIf="user && !isLoading">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="user-info-card mt-3">
-        <!-- You can display more user information here as needed -->
       </div>
     </div>
   </div>

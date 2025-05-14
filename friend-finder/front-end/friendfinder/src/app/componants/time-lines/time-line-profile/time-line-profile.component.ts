@@ -1,28 +1,30 @@
-import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, OnDestroy, ChangeDetectionStrategy} from '@angular/core';
 import { ProfileService } from "../../../../service/profile.service";
-import { HttpClient, HttpErrorResponse, HttpEventType } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-time-line-profile',
   templateUrl: './time-line-profile.component.html',
-  styleUrls: ['./time-line-profile.component.css']
+  styleUrls: ['./time-line-profile.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimeLineProfileComponent implements OnInit, OnDestroy {
-  user: any = null;
+  user: any;
   followerCount = 0;
   isLoading = false;
   uploadMessage = '';
-  uploadProgress = 0;
   private subscriptions: Subscription[] = [];
   imageUrl: string = '';
   defaultImageUrl: string = 'assets/default-profile.png';
-  photoTimestamp: number = Date.now(); // Used to force image refresh
+
+  selectedFile: File | null = null;
+  previewUrl: string | ArrayBuffer | null = null;
 
   constructor(
     private profileService: ProfileService,
     private http: HttpClient,
-    private changeDetector: ChangeDetectorRef
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -30,135 +32,88 @@ export class TimeLineProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Clean up all subscriptions to prevent memory leaks
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
+
   loadProfile(): void {
+    if (this.isLoading) return;
+
     this.isLoading = true;
-    const sub = this.profileService.getUserProfile().subscribe({
-      next: (data) => {
-        this.user = data;
-        // Extract follower count if it exists in the response
-        this.followerCount = data.followerCount || 0;
-        this.updateImageUrl();
-        this.changeDetector.detectChanges();
+
+    this.profileService.getUserProfile().subscribe({
+      next: (user) => {
+        this.user = user;
+        this.imageUrl = this.getFullImageUrl(user?.image);
+        this.cd.detectChanges();  // <- manually trigger view update
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Error loading profile:', err);
+        this.imageUrl = this.defaultImageUrl;
+        this.cd.detectChanges();
         this.isLoading = false;
-        this.changeDetector.detectChanges();
-      },
-      complete: () => {
-        this.isLoading = false;
-        this.changeDetector.detectChanges();
       }
     });
-    this.subscriptions.push(sub);
   }
 
-  updateImageUrl(): void {
-    this.photoTimestamp = Date.now(); // Update timestamp to force reload
-    this.imageUrl = this.getImageUrl();
-  }
-
-  onFileSelected(event: any): void {
-    const file: File = event.target.files[0];
-    if (!file) return;
-
-    // Validate file type
-    const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-    if (!validTypes.includes(file.type)) {
-      this.uploadMessage = 'Please select a valid image file (JPEG or PNG)';
-      setTimeout(() => this.uploadMessage = '', 3000);
-      return;
-    }
-
-    // Validate file size (limit to 5MB)
-    const maxSize = 5 * 1024 * 1024; // 5MB
-    if (file.size > maxSize) {
-      this.uploadMessage = 'File is too large. Please select an image less than 5MB';
-      setTimeout(() => this.uploadMessage = '', 3000);
-      return;
-    }
-
-    this.isLoading = true;
-    this.uploadMessage = 'Uploading...';
-    this.uploadProgress = 0;
-
-    const formData = new FormData();
-    formData.append('file', file);
-
-    const sub = this.profileService.uploadProfilePhoto(formData).subscribe({
-      next: (event: any) => {
-        // Track upload progress if using observe: 'events'
-        if (event.type === HttpEventType.UploadProgress && event.total) {
-          this.uploadProgress = Math.round(100 * event.loaded / event.total);
-          this.changeDetector.detectChanges();
-        } else if (event.type === HttpEventType.Response) {
-          // Upload completed
-          this.uploadMessage = 'Upload successful!';
-          this.uploadProgress = 100;
-
-          // Force reload image with cache busting
-          setTimeout(() => {
-            this.loadProfile();
-          }, 500);
-        }
-      },
-      error: (err) => {
-        console.error('Upload failed:', err);
-        this.uploadMessage = this.getErrorMessage(err);
-        this.isLoading = false;
-        this.changeDetector.detectChanges();
-      },
-      complete: () => {
-        this.isLoading = false;
-        setTimeout(() => {
-          this.uploadMessage = '';
-          this.uploadProgress = 0;
-          this.changeDetector.detectChanges();
-        }, 3000);
-      }
-    });
-    this.subscriptions.push(sub);
-  }
-
-  onImageError(event: Event): void {
-    const img = event.target as HTMLImageElement;
-    img.src = this.defaultImageUrl;
-    this.changeDetector.detectChanges();
-  }
-
-  getImageUrl(): string {
-    if (!this.user || !this.user.image) {
+  private getFullImageUrl(imagePath: string | null | undefined, bustCache = false): string {
+    if (!imagePath) {
       return this.defaultImageUrl;
     }
 
-    // Check if image is already a complete URL
-    if (this.user.image.startsWith('http')) {
-      return `${this.user.image}?t=${this.photoTimestamp}`; // Add timestamp to prevent caching
+    // If already a full URL, return as-is
+    if (imagePath.startsWith('http')) {
+      return imagePath;
     }
 
-    // Check if image path includes the '/profile-images/' prefix
-    if (this.user.image.startsWith('/profile-images/')) {
-      return `http://localhost:4040${this.user.image}?t=${this.photoTimestamp}`;
-    }
-
-    // As a fallback, add the domain
-    return `http://localhost:4040/${this.user.image}?t=${this.photoTimestamp}`;
+    // Build full URL for relative image paths
+    const fullUrl = `http://localhost:4050${imagePath.startsWith('/') ? '' : '/'}${imagePath}`;
+    return bustCache ? `${fullUrl}?t=${Date.now()}` : fullUrl;
   }
 
-  private getErrorMessage(error: HttpErrorResponse): string {
-    // Handle special case where success might be reported as error
-    if (error.status === 200) {
-      return 'Upload successful!';
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+    if (this.selectedFile) {
+      this.upload(); // Automatically upload after selecting
     }
+    if (this.selectedFile) {
+      const reader = new FileReader();
+      reader.onload = () => this.previewUrl = reader.result;
+      reader.readAsDataURL(this.selectedFile);
 
-    if (error.error instanceof ErrorEvent) {
-      return `Client-side error: ${error.error.message}`;
-    } else {
-      return `Server error: ${error.status} - ${error.error?.message || error.statusText || 'Unknown error'}`;
     }
+  }
+
+  upload(): void {
+    if (!this.selectedFile) return;
+
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+
+    this.uploadMessage = 'Uploading...';
+    this.isLoading = true;
+
+    this.http.post<any>('http://localhost:4050/user/upload-profile-image', formData).subscribe({
+      next: (response) => {
+        this.uploadMessage = 'Upload successful!';
+        this.previewUrl = null;
+        this.selectedFile = null;
+        this.loadProfile(); // Refresh to get the new image
+        window.location.reload(); // ✅ Reload the full page
+      },
+      error: (err: HttpErrorResponse) => {
+        this.uploadMessage = 'Upload failed: ' + this.getErrorMessage(err);
+        this.isLoading = false;
+      }
+    });
+  }
+
+
+
+  private getErrorMessage(error: HttpErrorResponse): string {
+    if (error.status === 200) return 'Upload successful!';
+    if (error.error instanceof ErrorEvent) return `Client error: ${error.error.message}`;
+    return `Server error: ${error.status} - ${error.error?.message || error.statusText}`;
   }
 }

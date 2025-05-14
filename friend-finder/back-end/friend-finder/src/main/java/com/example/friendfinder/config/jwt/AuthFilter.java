@@ -40,6 +40,11 @@ public class AuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        // Skip the /uploads/** path (static file paths)
+        if (request.getRequestURI().startsWith("/uploads/")) {
+            filterChain.doFilter(request, response); // Continue the filter chain without authentication
+            return;
+        }
         String token = request.getHeader("Authorization");
         if (token == null || !token.startsWith("Bearer ")) {
             response.reset();
