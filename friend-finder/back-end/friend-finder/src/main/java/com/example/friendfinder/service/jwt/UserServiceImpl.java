@@ -87,18 +87,7 @@ public class UserServiceImpl implements UserService{
         users.setRoles(roles);
         Users savedUser = userRepository.save(users);  // Save first
 
-        // Optional: Create a default self-Friend entry (if you must)
-//        Friend friend = new Friend();
-//        //friend.setUser(savedUser);
-//        friend.setSender(savedUser); // You can omit this if it's a placeholder
-//        friend.setReceiver(savedUser);
-//        friend.setAccepted(false); // or true if you want it auto-accepted
-//        //friend.setFriendid(savedUser.getId());
-//        friend.setName(savedUser.getFullname());
-//        friend.setEmail(savedUser.getEmail());
-//        friend.setImage(savedUser.getImage());
-//
-//        friendRepository.save(friend);  // Save the friend entity
+
     }
 
     @Override
@@ -118,5 +107,21 @@ public class UserServiceImpl implements UserService{
 
         return userDto;
     }
+    @Override
+    public UserDto getProfile(Long id) {
+        Optional<Users> optionalUser = userRepository.findById(id);
+        Users user = optionalUser.get();
 
+        UserDto userDto = UserMapper.USER_MAPPER.toDto(user);
+
+        return userDto;
+    }
+    @Override
+    public List<Users> getUsersNotFriendsWith(Long userId) {
+        return userRepository.findUsersNotFriendsWith(userId);
+    }
+    @Override
+    public void save(Users user) {
+        userRepository.save(user);
+    }
 }

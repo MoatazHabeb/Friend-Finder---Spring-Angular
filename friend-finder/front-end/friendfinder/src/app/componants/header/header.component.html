@@ -1,5 +1,4 @@
-<!-- Header
-    ================================================= -->
+<!-- Header ================================================= -->
 <header id="header">
   <nav class="navbar navbar-default navbar-fixed-top menu">
     <div class="container">
@@ -12,39 +11,49 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" routerLink="index.html"><img src="assets/images/logo.png" alt="logo" /></a>
+        <a class="navbar-brand" [routerLink]="['/mainpage']"><img src="assets/images/logo.png" alt="logo" /></a>
       </div>
-
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div *ngIf="isUserLogin()" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right main-menu">
-          <li class="dropdown"><a routerLink="mainpage">Home</a></li>
+          <li class="dropdown"><a [routerLink]="['/mainpage']">Home</a></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Timeline <span><img src="assets/images/down-arrow.png" alt="" /></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              Timeline <span><img src="assets/images/down-arrow.png" alt="" /></span>
+            </a>
             <ul class="dropdown-menu login">
-              <li><a routerLink="timeline">Timeline</a></li>
-              <li><a routerLink="timeline-about">Timeline About</a></li>
-              <li><a routerLink="timeline-album">Timeline Album</a></li>
-              <li><a routerLink="timeline-friends">Timeline Friends</a></li>
+              <li><a [routerLink]="['/timeline']">Timeline</a></li>
+              <li><a [routerLink]="['/timeline-about']">Timeline About</a></li>
+              <li><a [routerLink]="['/timeline-album']">Timeline Album</a></li>
+              <li><a [routerLink]="['/timeline-friends']">Timeline Friends</a></li>
             </ul>
           </li>
-<!--          <li class="dropdown">-->
-<!--            <a href="#" class="dropdown-toggle pages" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">All Pages <span><img src="assets/images/down-arrow.png" alt="" /></span></a>-->
-<!--            <ul class="dropdown-menu page-list">-->
-<!--              <li><a routerLink="timeline">Timeline</a></li>-->
-<!--              <li><a routerLink="timeline-about">Timeline About</a></li>-->
-<!--              <li><a routerLink="timeline-album">Timeline Album</a></li>-->
-<!--              <li><a routerLink="timeline-friends">Timeline Friends</a></li>-->
-<!--              <li><a routerLink="contact">Contact Us</a></li>-->
-<!--            </ul>-->
-<!--          </li>-->
-          <li class="dropdown"><a routerLink="contact">Contact</a></li>
+          <li class="dropdown"><a [routerLink]="['/contact']">Contact</a></li>
+          <li class="dropdown"><a (click)="logout()" class="logout-btn" style="cursor: pointer;">Log Out</a></li>
         </ul>
-        <form class="navbar-form navbar-right hidden-sm">
+
+        <form class="navbar-form navbar-right hidden-sm" (submit)="performSearch(); $event.preventDefault()">
           <div class="form-group">
             <i class="icon ion-android-search"></i>
-            <input type="text" class="form-control" placeholder="Search friends, photos, videos">
+            <input
+              class="form-control"
+              type="search"
+              placeholder="Search friends, photos, videos"
+              aria-label="Search"
+              [(ngModel)]="searchKey"
+              (keyup.enter)="onSearchEnter($event)"
+              #searchInput
+              name="searchInput"
+              #searchModel="ngModel"
+            >
+            <button
+              class="btn btn-outline-success"
+              type="submit"
+              [disabled]="!searchKey?.trim()"
+            >
+              Search
+            </button>
           </div>
         </form>
       </div><!-- /.navbar-collapse -->

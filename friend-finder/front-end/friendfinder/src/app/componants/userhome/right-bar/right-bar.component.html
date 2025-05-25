@@ -1,42 +1,22 @@
-<!-- Newsfeed Common Side Bar Right
-        ================================================= -->
 <div class="col-md-2 static">
   <div class="suggestions" id="sticky-sidebar">
     <h4 class="grey">Who to Follow</h4>
-    <div class="follow-user">
-      <img src="assets/images/users/user-11.jpg" alt="" class="profile-photo-sm pull-left" />
+
+    <div *ngFor="let user of nonFriends" class="follow-user">
+      <img [src]="user.image ? 'http://localhost:4050' + user.image :  'assets/images/profile-icon-design-free-vector-300x300.jpg'" alt="" class="profile-photo-sm pull-left" />
       <div>
-        <h5><a href="timeline.html">Diana Amber</a></h5>
-        <a href="#" class="text-green">Add friend</a>
+        <h5>
+          <a [routerLink]="['/timelinerofile', user.id]">{{ user.fullname }}</a>
+        </h5>
+        <a href="#" class="text-green" (click)="sendRequest(user.id); $event.preventDefault()">
+          Add friend
+        </a>
       </div>
     </div>
-    <div class="follow-user">
-      <img src="assets/images/users/user-12.jpg" alt="" class="profile-photo-sm pull-left" />
-      <div>
-        <h5><a href="timeline.html">Cris Haris</a></h5>
-        <a href="#" class="text-green">Add friend</a>
-      </div>
-    </div>
-    <div class="follow-user">
-      <img src="assets/images/users/user-13.jpg" alt="" class="profile-photo-sm pull-left" />
-      <div>
-        <h5><a href="timeline.html">Brian Walton</a></h5>
-        <a href="#" class="text-green">Add friend</a>
-      </div>
-    </div>
-    <div class="follow-user">
-      <img src="assets/images/users/user-14.jpg" alt="" class="profile-photo-sm pull-left" />
-      <div>
-        <h5><a href="timeline.html">Olivia Steward</a></h5>
-        <a href="#" class="text-green">Add friend</a>
-      </div>
-    </div>
-    <div class="follow-user">
-      <img src="assets/images/users/user-15.jpg" alt="" class="profile-photo-sm pull-left" />
-      <div>
-        <h5><a href="timeline.html">Sophia Page</a></h5>
-        <a href="#" class="text-green">Add friend</a>
-      </div>
+
+    <!-- Optional: Show message if no users -->
+    <div *ngIf="nonFriends.length === 0" class="text-muted p-2">
+      No suggestions at the moment.
     </div>
   </div>
 </div>

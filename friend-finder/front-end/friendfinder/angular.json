@@ -16,6 +16,7 @@
             "outputPath": "dist/friendfinder",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "statsJson": true,
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
@@ -74,7 +75,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "friendfinder:build",
-            "port": 2010
+            "port": 2020
           },
           "configurations": {
             "production": {

@@ -1,0 +1,272 @@
+/* Enhanced Timeline Cover */
+.timeline-cover {
+  background-image: url('/assets/images/wallhaven-vmv5kl-fotor-2025051322591.png');
+  background-size: cover;
+  background-position: top left;
+  height: 380px;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.cover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%);
+  backdrop-filter: blur(2px);
+}
+
+.profile-header {
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  height: 280px;
+  padding-bottom: 20px;
+  z-index: 2;
+}
+
+/* Avatar Styles */
+.profile-avatar {
+  position: relative;
+  margin-right: 30px;
+  margin-left: 20px;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.avatar-wrapper:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  z-index: 2;
+  position: relative;
+}
+
+.avatar-glow {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+  animation: pulse 3s infinite ease-in-out;
+  z-index: 1;
+}
+
+/* Profile Details */
+.profile-details {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.profile-badge {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 20px 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  max-width: 100%;
+}
+
+.profile-name {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.profile-meta {
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #f1f1f1;
+  gap: 1rem;
+}
+
+.meta-item i {
+  margin-right: 0.5rem;
+  color: #a8d5a3;
+}
+
+.meta-separator {
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: bold;
+}
+
+/* Friend Badge */
+.friend-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-left: 1.5rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(168, 213, 163, 0.9) 0%, rgba(44, 151, 75, 0.9) 100%);
+  border-radius: 9999px;
+  box-shadow: 0 6px 20px rgba(44, 151, 75, 0.6);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  user-select: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.friend-badge i {
+  font-size: 1.7rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+  animation: pulse-green 2s infinite ease-in-out;
+}
+
+.friend-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(44, 151, 75, 0.8);
+}
+
+/* Navigation */
+.profile-nav {
+  position: relative;
+  z-index: 2;
+  margin-top: 20px;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 10px;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link i {
+  font-size: 1.2rem;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.nav-link.active {
+  background: linear-gradient(135deg, rgba(168, 213, 163, 0.8) 0%, rgba(44, 151, 75, 0.8) 100%);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(44, 151, 75, 0.4);
+}
+
+/* Animations */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 0.6; }
+}
+
+@keyframes pulse-green {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: auto;
+    padding-top: 30px;
+  }
+
+  .profile-avatar {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .profile-name {
+    font-size: 2.5rem;
+    justify-content: center;
+  }
+
+  .friend-badge {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-cover {
+    height: 420px;
+  }
+
+  .avatar-wrapper {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profile-name {
+    font-size: 2rem;
+  }
+
+  .profile-meta {
+    font-size: 1.1rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    padding: 10px 15px;
+    font-size: 1rem;
+  }
+}

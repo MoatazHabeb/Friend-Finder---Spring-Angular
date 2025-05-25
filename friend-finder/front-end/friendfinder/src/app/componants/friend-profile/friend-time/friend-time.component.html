@@ -1,0 +1,137 @@
+<div class="container">
+  <div class="timeline">
+    <app-profile></app-profile>
+
+    <div id="page-contents">
+      <div class="row">
+        <div class="col-md-3"></div>
+
+        <div class="col-md-7">
+          <!-- Loading Indicator -->
+          <div *ngIf="loading" class="text-center py-4">
+            <i class="fa fa-spinner fa-spin fa-2x"></i>
+            <p>Loading posts...</p>
+          </div>
+
+          <!-- Post Feed -->
+          <div class="post-feed" *ngIf="!loading">
+            <div *ngFor="let post of posts" class="facebook-post">
+              <!-- Post Header -->
+              <div class="post-header">
+                <img [src]="getFullImageUrl(post.users?.image)"
+                     alt="Profile"
+                     class="post-author-image">
+                <div class="post-author-info">
+                  <h5 class="post-author-name">{{ post.users?.fullname || 'Unknown User' }}</h5>
+                  <div class="post-time">{{post.createdAt | date:'MMM d, y, h:mm a'}}</div>
+                </div>
+              </div>
+
+              <!-- Post Content -->
+              <div class="post-content">
+                <p class="post-text">{{post.text}}</p>
+                <div *ngIf="post.image" class="post-image-container">
+                  <img [src]="getFullImageUrl(post.image)" alt="Post image" class="post-image">
+                </div>
+                <div *ngIf="post.video" class="post-video-container">
+                  <video controls class="post-video">
+                    <source [src]="getFullImageUrl(post.video)" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- Post Stats -->
+              <div class="post-stats">
+                <div class="stat-container">
+                  <button class="stat-btn like-btn" (click)="toggleLikesList(post)">
+                    <span class="count">{{post.likes?.length || 0}}</span>
+                  </button>
+                  <div class="reactors-list" *ngIf="post.showLikesList">
+                    <div *ngFor="let like of post.likes" class="reactor">
+                      <img [src]="getFullImageUrl(like.user?.image)" class="reactor-image">
+                      <span class="reactor-name">{{like.user?.fullname || 'Unknown User'}}</span>
+                    </div>
+                    <div *ngIf="post.likes?.length === 0" class="no-reactors">No likes yet</div>
+                  </div>
+                </div>
+
+                <div class="stat-container">
+                  <button class="stat-btn dislike-btn" (click)="toggleDislikesList(post)">
+                    <span class="count">{{post.dislikes?.length || 0}}</span>
+                  </button>
+                  <div class="reactors-list" *ngIf="post.showDislikesList">
+                    <div *ngFor="let dislike of post.dislikes" class="reactor">
+                      <img [src]="getFullImageUrl(dislike.user?.image)" class="reactor-image">
+                      <span class="reactor-name">{{dislike.user?.fullname || 'Unknown User'}}</span>
+                    </div>
+                    <div *ngIf="post.dislikes?.length === 0" class="no-reactors">No dislikes yet</div>
+                  </div>
+                </div>
+
+                <button class="stat-btn comment-btn">
+                  <span class="count">{{post.commentList?.length || 0}}</span>
+                </button>
+              </div>
+
+              <!-- Post Actions -->
+              <div class="post-actions">
+                <button class="action-btn like-btn"
+                        [class.active]="post.userLiked"
+                        (click)="toggleLike(post)">
+                  <i class="fa fa-thumbs-up"></i> Like
+                </button>
+                <button class="action-btn dislike-btn"
+                        [class.active]="post.userDisliked"
+                        (click)="toggleDislike(post)">
+                  <i class="fa fa-thumbs-down"></i> Dislike
+                </button>
+                <button class="action-btn comment-btn"
+                        (click)="toggleCommentSection(post)">
+                  <i class="fa fa-comment"></i> Comment
+                </button>
+              </div>
+
+              <!-- Comments Section -->
+              <div class="comments-section" *ngIf="post.showComments">
+                <div *ngFor="let comment of post.commentList" class="comment">
+                  <img [src]="getFullImageUrl(comment.user?.image)" alt="Profile" class="comment-author-image">
+                  <div class="comment-content">
+                    <div class="comment-header">
+                      <span class="comment-author-name">{{comment.user?.fullname || 'Unknown User'}}</span>
+                      <span class="comment-time">{{comment.createdAt | date:'MMM d, h:mm a'}}</span>
+                    </div>
+                    <p class="comment-text">{{comment.text}}</p>
+                  </div>
+                </div>
+
+                <!-- Add Comment -->
+                <div class="add-comment">
+                  <img [src]="imageUrl" alt="Profile" class="comment-author-image">
+                  <div class="comment-input-container">
+                    <input type="text"
+                           [(ngModel)]="post.newComment"
+                           placeholder="Write a comment..."
+                           class="comment-input"
+                           (keyup.enter)="addComment(post)">
+                    <button class="comment-submit-btn" (click)="addComment(post)">
+                      <i class="fa fa-paper-plane"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- No Posts Message -->
+            <div *ngIf="posts.length === 0 && !loading" class="no-posts">
+              <p>No posts found.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

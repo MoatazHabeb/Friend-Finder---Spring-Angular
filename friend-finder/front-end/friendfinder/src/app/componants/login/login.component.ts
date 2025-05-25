@@ -51,20 +51,27 @@ export class LoginComponent implements OnInit {
     }
 
 
-    this.authService.login(email , password).subscribe(
+    this.authService.login(email, password).subscribe(
       (response) => {
-        localStorage.setItem('jwtToken', response.token); // Store token in localStorage
-        if (response && 'status' in response && response.status === 'NOT_ACCEPTABLE') {
-          // @ts-ignore
+        if (response.status === 'NOT_ACCEPTABLE') {
           this.messageAr = response.bundleMessage.message_ar;
-          // @ts-ignore
           this.messageEn = response.bundleMessage.message_en;
-
           this.extracted();
         } else {
           sessionStorage.setItem('token', 'Bearer ' + response.token);
           sessionStorage.setItem('roles', 'Bearer ' + response.roles);
-          this.router.navigateByUrl('/mainpage');
+
+          // 👇 Call /user/me to refresh user info
+          this.authService.getCurrentUser().subscribe(
+            user => {
+              this.authService.currentUser = user;
+              this.router.navigateByUrl('/mainpage');
+            },
+            error => {
+              console.error('Failed to fetch user:', error);
+              this.router.navigateByUrl('/mainpage');
+            }
+          );
         }
       }
     );

@@ -1,147 +1,135 @@
-<div class="container">
-  <div class="timeline">
-      <app-time-line-profile></app-time-line-profile>
-      <div id="page-contents">
-        <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-7">
+<!-- timeline.component.html -->
+<div class="timeline-container">
+  <app-time-line-profile></app-time-line-profile>
 
-              <app-publish></app-publish>
+  <div id="page-contents">
+    <div class="centered-content">
+      <app-publish></app-publish>
 
-              <!-- Post Content
-              ================================================= -->
-              <div class="post-content">
+      <!-- Loading Indicator -->
+      <div *ngIf="loading" class="loading-indicator">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Loading your posts...</p>
+      </div>
 
-                <!--Post Date-->
-                <div class="post-date hidden-xs hidden-sm">
-                  <h5>Sarah</h5>
-                  <p class="text-grey">Sometimes ago</p>
-                </div><!--Post Date End-->
-
-                <img src="assets/images/post-images/12.jpg" alt="post-image" class="img-responsive post-image">
-                <div class="post-container">
-                  <img src="assets/images/users/user-1.jpg" alt="user" class="profile-photo-md pull-left">
-                  <div class="post-detail">
-                    <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-                      <p class="text-muted">Published a photo about 15 mins ago</p>
-                    </div>
-                    <div class="reaction">
-                      <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
-                      <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-text">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-comment">
-                      <img src="assets/images/users/user-11.jpg" alt="" class="profile-photo-sm">
-                      <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="assets/images/users/user-4.jpg" alt="" class="profile-photo-sm">
-                      <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="assets/images/users/user-1.jpg" alt="" class="profile-photo-sm">
-                      <input type="text" class="form-control" placeholder="Post a comment">
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Post Content
-              ================================================= -->
-              <div class="post-content">
-
-                <!--Post Date-->
-                <div class="post-date hidden-xs hidden-sm">
-                  <h5>Sarah</h5>
-                  <p class="text-grey">10/22/2016</p>
-                </div><!--Post Date End-->
-
-                <img src="assets/images/post-images/13.jpg" alt="post-image" class="img-responsive post-image">
-                <div class="post-container">
-                  <img src="assets/images/users/user-1.jpg" alt="user" class="profile-photo-md pull-left">
-                  <div class="post-detail">
-                    <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-                      <p class="text-muted">Yesterday</p>
-                    </div>
-                    <div class="reaction">
-                      <a class="btn text-green"><i class="icon ion-thumbsup"></i> 49</a>
-                      <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-text">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-comment">
-                      <img src="assets/images/users/user-11.jpg" alt="" class="profile-photo-sm">
-                      <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="assets/images/users/user-4.jpg" alt="" class="profile-photo-sm">
-                      <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="assets/images/users/user-1.jpg" alt="" class="profile-photo-sm">
-                      <input type="text" class="form-control" placeholder="Post a comment">
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Post Content
-              ================================================= -->
-              <div class="post-content">
-
-                <!--Post Date-->
-                <div class="post-date hidden-xs hidden-sm">
-                  <h5>Sarah</h5>
-                  <p class="text-grey">10/21/2016</p>
-                </div><!--Post Date End-->
-
-                <div class="post-container">
-                  <img src="assets/images/users/user-1.jpg" alt="user" class="profile-photo-md pull-left">
-                  <div class="post-detail">
-                    <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-                      <p class="text-muted">2 days ago</p>
-                    </div>
-                    <div class="reaction">
-                      <a class="btn text-green"><i class="icon ion-thumbsup"></i> 49</a>
-                      <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-text">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-comment">
-                      <img src="assets/images/users/user-11.jpg" alt="" class="profile-photo-sm">
-                      <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="assets/images/users/user-4.jpg" alt="" class="profile-photo-sm">
-                      <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="assets/images/users/user-1.jpg" alt="" class="profile-photo-sm">
-                      <input type="text" class="form-control" placeholder="Post a comment">
-                    </div>
-                  </div>
-                </div>
+      <!-- Post Feed -->
+      <div class="post-feed" *ngIf="!loading">
+        <div *ngFor="let post of posts" class="facebook-post">
+          <!-- Post Header -->
+          <div class="post-header">
+            <img [src]="getFullImageUrl(post.users?.image)"
+                 alt="Profile"
+                 class="post-author-image">
+            <div class="post-author-info">
+              <h5 class="post-author-name">{{ post.users?.fullname || 'Unknown User' }}</h5>
+              <div class="post-time">{{post.createdAt | date:'MMM d, y, h:mm a'}}</div>
             </div>
           </div>
 
+          <!-- Post Content -->
+          <div class="post-content">
+            <p class="post-text" style="color: black">{{post.text}}</p>
+            <div *ngIf="post.image" class="post-image-container">
+              <img [src]="getFullImageUrl(post.image)" alt="Post image" class="post-image">
+            </div>
+            <div *ngIf="post.video" class="post-video-container">
+              <video controls class="post-video">
+                <source [src]="getFullImageUrl(post.video)" type="video/mp4">
+              </video>
+            </div>
+          </div>
 
+          <!-- Post Stats -->
+          <div class="post-stats">
+            <div class="stat-container">
+              <button class="stat-btn like-btn" (click)="toggleLikesList(post)">
+                <i class="fa fa-thumbs-up"></i>
+                <span class="count">{{post.likes?.length || 0}}</span>
+              </button>
+              <div class="reactors-list" *ngIf="post.showLikesList">
+                <div *ngFor="let like of post.likes" class="reactor">
+                  <img [src]="getFullImageUrl(like.user?.image)" class="reactor-image">
+                  <span class="reactor-name">{{like.user?.fullname || 'Unknown User'}}</span>
+                </div>
+                <div *ngIf="post.likes?.length === 0" class="no-reactors">No likes yet</div>
+              </div>
+            </div>
 
-          <app-time-line-detailes></app-time-line-detailes>
+            <div class="stat-container">
+              <button class="stat-btn dislike-btn" (click)="toggleDislikesList(post)">
+                <i class="fa fa-thumbs-down"></i>
+                <span class="count">{{post.dislikes?.length || 0}}</span>
+              </button>
+              <div class="reactors-list" *ngIf="post.showDislikesList">
+                <div *ngFor="let dislike of post.dislikes" class="reactor">
+                  <img [src]="getFullImageUrl(dislike.user?.image)" class="reactor-image">
+                  <span class="reactor-name">{{dislike.user?.fullname || 'Unknown User'}}</span>
+                </div>
+                <div *ngIf="post.dislikes?.length === 0" class="no-reactors">No dislikes yet</div>
+              </div>
+            </div>
+
+            <button class="stat-btn comment-btn">
+              <i class="fa fa-comment"></i>
+              <span class="count">{{post.commentList?.length || 0}}</span>
+            </button>
+          </div>
+
+          <!-- Post Actions -->
+          <div class="post-actions">
+            <button class="action-btn like-btn"
+                    [class.active]="post.userLiked"
+                    (click)="toggleLike(post)">
+              <i class="fa fa-thumbs-up"></i> Like
+            </button>
+            <button class="action-btn dislike-btn"
+                    [class.active]="post.userDisliked"
+                    (click)="toggleDislike(post)">
+              <i class="fa fa-thumbs-down"></i> Dislike
+            </button>
+            <button class="action-btn comment-btn"
+                    (click)="toggleCommentSection(post)">
+              <i class="fa fa-comment"></i> Comment
+            </button>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="comments-section" *ngIf="post.showComments">
+            <div *ngFor="let comment of post.commentList" class="comment">
+              <img [src]="getFullImageUrl(comment.user?.image)" alt="Profile" class="comment-author-image">
+              <div class="comment-content">
+                <div class="comment-header">
+                  <span class="comment-author-name">{{comment.user?.fullname || 'Unknown User'}}</span>
+                  <span class="comment-time">{{comment.createdAt | date:'MMM d, h:mm a'}}</span>
+                </div>
+                <p class="comment-text">{{comment.text}}</p>
+              </div>
+            </div>
+
+            <!-- Add Comment -->
+            <div class="add-comment">
+              <img [src]="imageUrl" alt="Profile" class="comment-author-image">
+              <div class="comment-input-container">
+                <input type="text"
+                       [(ngModel)]="post.newComment"
+                       placeholder="Write a comment..."
+                       class="comment-input"
+                       (keyup.enter)="addComment(post)">
+                <button class="comment-submit-btn" (click)="addComment(post)">
+                  <i class="fa fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- No Posts Message -->
+        <div *ngIf="posts.length === 0 && !loading" class="no-posts">
+          <i class="fa fa-newspaper-o"></i>
+          <h3>No Posts Yet</h3>
+          <p>You haven't posted anything yet. Share something with your friends!</p>
         </div>
       </div>
-
     </div>
+  </div>
 </div>

@@ -1,0 +1,329 @@
+/* Modern Dark Header Styles */
+#header {
+  position: relative;
+  z-index: 1000;
+}
+
+.navbar {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f0f 100%);
+  border: none;
+  min-height: 70px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.navbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.02);
+  pointer-events: none;
+}
+
+.navbar-fixed-top {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Container */
+.navbar .container {
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+/* Brand/Logo */
+.navbar-brand {
+  padding: 15px 20px;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+.navbar-brand img {
+  max-height: 40px;
+  width: auto;
+  filter: brightness(1.2) contrast(1.1);
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover img {
+  filter: brightness(1.4) contrast(1.2);
+}
+
+/* Mobile Toggle Button */
+.navbar-toggle {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 12px;
+  margin-top: 18px;
+  margin-right: 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.navbar-toggle:hover,
+.navbar-toggle:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.navbar-toggle .icon-bar {
+  background-color: #ffffff;
+  height: 3px;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Navigation Menu */
+.main-menu {
+  margin: 0;
+  padding: 0;
+}
+
+.main-menu > li {
+  margin: 0 5px;
+}
+
+.main-menu > li > a {
+  color: #ffffff !important;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 25px 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+  text-decoration: none;
+}
+
+.main-menu > li > a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.main-menu > li > a:hover::before,
+.main-menu > li.active > a::before {
+  width: 80%;
+}
+
+.main-menu > li > a:hover,
+.main-menu > li > a:focus {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff !important;
+  border-radius: 8px;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  background: rgba(26, 26, 46, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px);
+  margin-top: 0;
+  padding: 10px 0;
+}
+
+.dropdown-menu > li > a {
+  color: #ffffff;
+  padding: 12px 25px;
+  font-weight: 400;
+  transition: all 0.3s ease;
+}
+
+.dropdown-menu > li > a:hover {
+  background: linear-gradient(45deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+  color: #ffffff;
+  transform: translateX(5px);
+}
+
+/* Dropdown Arrow */
+.main-menu .dropdown-toggle span img {
+  filter: brightness(0) invert(1);
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.main-menu .dropdown.open .dropdown-toggle span img {
+  transform: rotate(180deg);
+}
+
+/* Search Form */
+.navbar-form {
+  margin: 12px 0;
+  padding: 0;
+}
+
+.navbar-form .form-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  padding: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.navbar-form .form-group:hover,
+.navbar-form .form-group:focus-within {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+}
+
+.navbar-form .icon,
+.navbar-form i {
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0 15px;
+  font-size: 18px;
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.navbar-form .form-control {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  padding: 12px 15px 12px 50px;
+  font-size: 14px;
+  width: 250px;
+  outline: none;
+  box-shadow: none;
+}
+
+.navbar-form .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+.navbar-form .form-control:focus {
+  background: transparent;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.navbar-form .btn {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: #ffffff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 0 25px 25px 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.navbar-form .btn:hover:not(:disabled) {
+  background: linear-gradient(45deg, #764ba2, #667eea);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.navbar-form .btn:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+}
+
+/* Logout Button Special Styling */
+.logout-btn {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a52) !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: linear-gradient(45deg, #ee5a52, #ff6b6b) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+  .navbar-collapse {
+    background: rgba(26, 26, 46, 0.98);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 10px;
+    border-radius: 0 0 15px 15px;
+    backdrop-filter: blur(15px);
+  }
+
+  .main-menu > li > a {
+    padding: 15px 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .main-menu > li > a::before {
+    display: none;
+  }
+
+  .navbar-form {
+    margin: 15px;
+  }
+
+  .navbar-form .form-control {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-form .form-control {
+    width: 200px;
+  }
+}
+
+/* Animation for page load */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.navbar {
+  animation: slideDown 0.6s ease-out;
+}
+
+/* Glassmorphism effect enhancement */
+.navbar-collapse.in,
+.navbar-collapse.collapsing {
+  backdrop-filter: blur(20px);
+}
+
+/* Active link highlighting */
+.main-menu > li.active > a,
+.main-menu > li > a[aria-expanded="true"] {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+/* Smooth scrolling adjustment for fixed header */
+html {
+  scroll-padding-top: 70px;
+}

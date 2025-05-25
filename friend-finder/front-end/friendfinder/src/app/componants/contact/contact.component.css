@@ -1,41 +1,392 @@
-/* Labels styling */
-.container label {
-  color: #8080ff;
-  display: block;
-  margin-bottom: 0.5rem;
+/* Modern Contact Form Styles */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  animation: containerFloat 6s ease-in-out infinite;
 }
 
-/* Input fields and textarea styling */
+@keyframes containerFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Animated background gradient */
+.container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    rgba(138, 43, 226, 0.1) 0deg,
+    rgba(30, 144, 255, 0.1) 60deg,
+    rgba(255, 20, 147, 0.1) 120deg,
+    rgba(0, 255, 127, 0.1) 180deg,
+    rgba(255, 165, 0, 0.1) 240deg,
+    rgba(138, 43, 226, 0.1) 300deg,
+    rgba(30, 144, 255, 0.1) 360deg
+  );
+  animation: rotate 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Title styling */
+.container h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  from { filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.3)); }
+  to { filter: drop-shadow(0 0 20px rgba(118, 75, 162, 0.5)); }
+}
+
+.container h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
+  animation: underlineExpand 2s ease-in-out infinite alternate;
+}
+
+@keyframes underlineExpand {
+  from { width: 60px; }
+  to { width: 120px; }
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+/* Label styling */
+.container label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #e2e8f0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.container label::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.form-group:hover label::before,
+.form-group:focus-within label::before {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.2);
+}
+
+/* Input and textarea base styling */
 .container input.form-control,
 .container textarea.form-control {
-  border-color: #8080ff;
-  color: #8080ff;
   width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  border-radius: 4px;
-  border-width: 1px;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  color: #f8fafc;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  position: relative;
 }
 
-/* Focus state for better UX */
+.container input.form-control::placeholder,
+.container textarea.form-control::placeholder {
+  color: rgba(248, 250, 252, 0.5);
+  transition: all 0.3s ease;
+}
+
+/* Focus states with amazing effects */
 .container input.form-control:focus,
 .container textarea.form-control:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(128, 128, 255, 0.2); /* subtle glow effect */
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid transparent;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)),
+    linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow:
+    0 0 30px rgba(102, 126, 234, 0.3),
+    0 0 60px rgba(118, 75, 162, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
-/* Button styling */
-.container .send-button {
-  background-color: #4CAF50; /* green color */
-  border-color: #4CAF50;
-  color: white;
+.container input.form-control:focus::placeholder,
+.container textarea.form-control:focus::placeholder {
+  color: rgba(248, 250, 252, 0.7);
+  transform: translateX(5px);
+}
+
+/* Hover effects */
+.container input.form-control:hover,
+.container textarea.form-control:hover {
+  border-color: rgba(102, 126, 234, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Textarea specific styling */
+.container textarea.form-control {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+/* Error message styling */
+.text-danger {
+  margin-top: 0.5rem;
   padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
 }
 
-/* Button hover effect */
+.text-danger small {
+  color: #fca5a5;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: block;
+  animation: errorSlide 0.3s ease-out;
+}
+
+@keyframes errorSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button styling - the masterpiece */
+.container .send-button {
+  width: 100%;
+  padding: 1.25rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-size: 200% 200%;
+  border: none;
+  border-radius: 16px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 10px 30px rgba(102, 126, 234, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  animation: buttonPulse 4s ease-in-out infinite;
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    background-position: 0% 50%;
+    box-shadow:
+      0 10px 30px rgba(102, 126, 234, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    background-position: 100% 50%;
+    box-shadow:
+      0 15px 40px rgba(118, 75, 162, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+}
+
+.container .send-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
 .container .send-button:hover {
-  background-color: #45a049; /* slightly darker green */
+  transform: translateY(-3px);
+  box-shadow:
+    0 20px 50px rgba(102, 126, 234, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background-position: 100% 50%;
+}
+
+.container .send-button:hover::before {
+  left: 100%;
+}
+
+.container .send-button:active {
+  transform: translateY(-1px);
+  transition: transform 0.1s ease;
+}
+
+.container .send-button:disabled {
+  background: rgba(148, 163, 184, 0.3);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  animation: none;
+}
+
+.container .send-button:disabled::before {
+  display: none;
+}
+
+/* Alert messages */
+.alert {
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 16px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: alertSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes alertSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alert.alert-success {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: #86efac;
+}
+
+.alert.alert-danger {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+.alert p {
+  margin: 0;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem;
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+
+  .container h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .container input.form-control,
+  .container textarea.form-control {
+    padding: 0.875rem 1rem;
+    border-radius: 12px;
+  }
+
+  .container .send-button {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 12px;
+  }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: rgba(15, 23, 42, 0.8);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .container input.form-control,
+  .container textarea.form-control {
+    background: rgba(15, 23, 42, 0.6);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

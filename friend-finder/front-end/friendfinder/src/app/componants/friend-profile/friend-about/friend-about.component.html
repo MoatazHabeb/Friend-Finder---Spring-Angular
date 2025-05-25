@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="timeline">
+   <app-profile></app-profile>
+
+    <div id="page-contents">
+      <div class="col-md-6 offset-md-3">
+        <div class="card shadow-sm rounded-4 p-4 border-0 about-section" *ngIf="userDetails">
+          <h3 class="mb-4 text-primary">About</h3>
+          <p><strong>🏢 Work:</strong> {{ userDetails.work }}</p>
+          <p><strong>📍 City:</strong> {{ userDetails.city }}</p>
+          <p><strong>❤️ Relationship:</strong> {{ userDetails.relationship }}</p>
+          <p><strong>🏫 High School:</strong> {{ userDetails.highSchool }}</p>
+          <p><strong>🎓 College:</strong> {{ userDetails.college }}</p>
+          <p><strong>🧠 Bio:</strong> {{ userDetails.bio }}</p>
+          <p><strong>🎂 Birthday:</strong> {{ userDetails.birthday | date:'longDate' }}</p>
+          <p><strong>🗣️ Languages:</strong> {{ languagesList }}</p>
+          <p><strong>⭐ Interests:</strong> {{ interestsList }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

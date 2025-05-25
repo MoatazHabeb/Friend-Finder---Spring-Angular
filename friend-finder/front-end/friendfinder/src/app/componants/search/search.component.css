@@ -1,0 +1,463 @@
+/* Modern Dark Search Page Styles */
+.search-page {
+  background: linear-gradient(135deg, #0f0f1a 0%, #121225 100%);
+  min-height: 100vh;
+  padding: 30px 0;
+  color: #ffffff;
+}
+
+.search-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Search Box - Enhanced Glassmorphism */
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(26, 26, 46, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  padding: 5px 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.search-box:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+}
+
+.search-icon {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 20px;
+  margin-right: 15px;
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 12px 0;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+}
+
+.search-btn {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 25px;
+  margin-left: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.search-btn:hover:not(:disabled) {
+  background: linear-gradient(45deg, #764ba2, #667eea);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.search-btn:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+}
+
+.clear-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.clear-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Error Message */
+.alert-danger {
+  background: rgba(255, 107, 107, 0.2);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  color: #ff6b6b;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(5px);
+}
+
+/* Loading Indicator */
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  margin: 20px 0;
+}
+
+.spinner-border {
+  width: 2rem;
+  height: 2rem;
+  border-width: 0.2em;
+  margin-right: 15px;
+}
+
+.loading-text {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Search Results Container */
+.search-results-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Section Titles */
+.section-title {
+  color: #ffffff;
+  font-size: 22px;
+  margin: 30px 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(102, 126, 234, 0.5);
+  display: flex;
+  align-items: center;
+}
+
+.section-title i {
+  margin-right: 10px;
+  color: #667eea;
+}
+
+/* User Cards - Modern Glass Cards */
+.user-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.user-card {
+  background: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  border-color: rgba(102, 126, 234, 0.3);
+  background: rgba(26, 26, 46, 0.8);
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20px;
+  border: 3px solid rgba(102, 126, 234, 0.5);
+}
+
+.user-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-details {
+  flex: 1;
+}
+
+.user-name {
+  margin: 0 0 5px;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.user-email {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+.user-meta {
+  display: flex;
+  gap: 15px;
+  margin-top: 8px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+}
+
+.meta-item i {
+  margin-right: 5px;
+  font-size: 12px;
+}
+
+/* Post Cards - Modern Design */
+.post-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 25px;
+}
+
+.post-card {
+  background: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  border-color: rgba(102, 126, 234, 0.3);
+  background: rgba(26, 26, 46, 0.8);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.post-author-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+  border: 2px solid rgba(102, 126, 234, 0.5);
+}
+
+.post-author {
+  font-weight: 600;
+  color: #ffffff;
+  margin-right: auto;
+}
+
+.post-date {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+}
+
+.post-text {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.post-media {
+  margin-bottom: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.post-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.post-video {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.post-actions {
+  display: flex;
+  gap: 10px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.action-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.action-btn i {
+  margin-right: 5px;
+}
+
+.action-btn:hover {
+  background: rgba(102, 126, 234, 0.3);
+  color: #ffffff;
+}
+
+.like-btn:hover {
+  background: rgba(255, 107, 107, 0.3);
+}
+
+.comment-btn:hover {
+  background: rgba(107, 255, 206, 0.3);
+}
+
+/* No Results & Initial State */
+.no-results, .initial-state {
+  text-align: center;
+  padding: 50px 20px;
+  background: rgba(26, 26, 46, 0.5);
+  border-radius: 15px;
+  margin: 30px 0;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.no-results-icon, .search-placeholder-icon {
+  font-size: 50px;
+  color: rgba(102, 126, 234, 0.5);
+  margin-bottom: 20px;
+}
+
+.no-results h4, .search-placeholder h3 {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.no-results p, .search-placeholder p {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+}
+
+.search-suggestions, .search-examples {
+  text-align: left;
+  max-width: 500px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.search-suggestions p, .search-examples p {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.search-suggestions ul, .search-examples ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-suggestions li, .search-examples li {
+  padding: 5px 0;
+  color: rgba(255, 255, 255, 0.7);
+  position: relative;
+  padding-left: 20px;
+}
+
+.search-suggestions li::before, .search-examples li::before {
+  content: '•';
+  color: #667eea;
+  position: absolute;
+  left: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-box {
+    flex-direction: row;
+    padding: 5px 15px;
+  }
+
+  .search-btn {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+
+  .user-list, .post-list {
+    grid-template-columns: 1fr;
+  }
+
+  .user-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .user-avatar {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .user-meta {
+    justify-content: center;
+  }
+}
+
+/* Animation Enhancements */
+.user-card, .post-card {
+  animation: cardEnter 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes cardEnter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Delay animations for each card */
+.user-card:nth-child(1) { animation-delay: 0.1s; }
+.user-card:nth-child(2) { animation-delay: 0.2s; }
+.user-card:nth-child(3) { animation-delay: 0.3s; }
+.user-card:nth-child(4) { animation-delay: 0.4s; }
+.user-card:nth-child(5) { animation-delay: 0.5s; }
+.post-card:nth-child(1) { animation-delay: 0.2s; }
+.post-card:nth-child(2) { animation-delay: 0.3s; }
+.post-card:nth-child(3) { animation-delay: 0.4s; }
+.post-card:nth-child(4) { animation-delay: 0.5s; }
+.post-card:nth-child(5) { animation-delay: 0.6s; }

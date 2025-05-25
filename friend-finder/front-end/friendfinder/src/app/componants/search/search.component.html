@@ -1,0 +1,175 @@
+<div class="search-page">
+  <div class="search-container">
+    <!-- Search Box -->
+    <div class="search-box">
+      <i class="icon ion-android-search search-icon"></i>
+      <input
+        type="text"
+        [formControl]="searchControl"
+        placeholder="Search for users, posts, photos..."
+        class="search-input"
+        (keyup.enter)="onEnterPress()"
+      >
+      <button
+        (click)="onSearchClick()"
+        class="search-btn"
+        [disabled]="!searchControl.value || isLoading"
+        type="button"
+      >
+        <span *ngIf="!isLoading">Search</span>
+        <span *ngIf="isLoading">Searching...</span>
+      </button>
+      <button
+        (click)="clearSearch()"
+        class="clear-btn"
+        *ngIf="searchControl.value"
+        type="button"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Loading Indicator -->
+    <div *ngIf="isLoading" class="loading-indicator">
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <span class="loading-text">Searching for "{{ currentKeyword }}"...</span>
+    </div>
+
+    <!-- Search Results -->
+    <div *ngIf="hasSearched && !isLoading && !errorMessage" class="search-results-container">
+
+      <!-- Users Results Section -->
+      <div *ngIf="searchResults.users && searchResults.users.length > 0" class="results-section">
+        <h3 class="section-title">
+          <i class="fas fa-users"></i> Users ({{searchResults.users.length}})
+        </h3>
+        <div class="user-list">
+          <div
+            *ngFor="let user of searchResults.users; trackBy: trackByUserId"
+            class="user-card"
+            (click)="navigateToProfile(user.id)"
+            role="button"
+            tabindex="0"
+            (keyup.enter)="navigateToProfile(user.id)"
+          >
+            <div class="user-avatar">
+              <img
+                [src]="getSafeUserImage(user.image)"
+                [alt]="user.fullname"
+                class="user-image"
+                (error)="handleImageError($event)"
+              >
+            </div>
+            <div class="user-details">
+              <h4 class="user-name">{{ user.fullname }}</h4>
+              <p class="user-email" *ngIf="user.email">{{ user.email }}</p>
+              <div class="user-meta" *ngIf="user.gender || user.age">
+                <span class="meta-item" *ngIf="user.gender">
+                  <i class="fas fa-user"></i> {{ user.gender }}
+                </span>
+                <span class="meta-item" *ngIf="user.age">
+                  <i class="fas fa-birthday-cake"></i> {{ user.age }} years
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Posts Results Section -->
+      <div *ngIf="searchResults.posts && searchResults.posts.length > 0" class="results-section">
+        <h3 class="section-title">
+          <i class="fas fa-newspaper"></i> Posts ({{searchResults.posts.length}})
+        </h3>
+        <div class="post-list">
+          <div *ngFor="let post of searchResults.posts; trackBy: trackByPostId" class="post-card">
+            <div class="post-header">
+              <img
+                [src]="getSafeUserImage(post.users?.image)"
+                class="post-author-img"
+                [alt]="post.users?.fullname || 'User'"
+                (error)="handleImageError($event)"
+              >
+              <span class="post-author">{{post.users?.fullname || 'Unknown User'}}</span>
+              <span class="post-date" *ngIf="post.createdAt">
+                {{post.createdAt | date:'mediumDate'}}
+              </span>
+            </div>
+            <p class="post-text" *ngIf="post.text">{{ post.text }}</p>
+            <div *ngIf="post.image" class="post-media">
+              <img
+                [src]="getSafePostImage(post.image)"
+                alt="Post image"
+                class="post-image"
+                (error)="handleImageError($event)"
+              >
+            </div>
+            <div *ngIf="post.video" class="post-media">
+              <video
+                [src]="getSafePostVideo(post.video)"
+                class="post-video"
+                controls
+                (error)="handleVideoError($event)"
+              >
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="post-actions">
+              <button
+                class="action-btn see-post-btn"
+                type="button"
+                (click)="navigateToProfile2(post.users?.id)"
+              >
+                <i class="fas fa-external-link-alt"></i> See Post
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- No Results Section -->
+      <div *ngIf="(!searchResults.users || searchResults.users.length === 0) &&
+                 (!searchResults.posts || searchResults.posts.length === 0)"
+           class="no-results">
+        <div class="no-results-content">
+          <i class="fas fa-search no-results-icon"></i>
+          <h4>No results found for "{{ currentKeyword }}"</h4>
+          <p>Try different keywords or check your spelling</p>
+          <div class="search-suggestions">
+            <p><strong>Search tips:</strong></p>
+            <ul>
+              <li>Try using different keywords</li>
+              <li>Check your spelling</li>
+              <li>Use more general terms</li>
+              <li>Try searching for usernames or post content</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Initial State (when no search has been performed) -->
+    <div *ngIf="!hasSearched && !isLoading" class="initial-state">
+      <div class="search-placeholder">
+        <i class="fas fa-search search-placeholder-icon"></i>
+        <h3>Search for users and posts</h3>
+        <p>Enter keywords to find users, posts, photos, and more</p>
+        <div class="search-examples">
+          <p><strong>You can search for:</strong></p>
+          <ul>
+            <li>User names</li>
+            <li>Post content</li>
+            <li>Topics and hashtags</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

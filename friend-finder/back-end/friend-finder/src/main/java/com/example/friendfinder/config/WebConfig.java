@@ -10,21 +10,22 @@ import java.nio.file.Paths;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-        @Override
-        public void addResourceHandlers(ResourceHandlerRegistry registry) {
-            // Get current directory (likely "back-end")
-            String currentDir = new File("").getAbsolutePath();
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        String currentDir = new File("").getAbsolutePath(); // This is back-end
 
-            String uploadDir = currentDir + File.separator + "friend-finder" + File.separator + "uploads" + File.separator;
+        String uploadDir = currentDir + File.separator + "friend-finder" + File.separator + "upload" + File.separator;
+        String uploadsDir = currentDir + File.separator + "friend-finder" + File.separator + "uploads" + File.separator;
 
-            String resourceLocation = "file:" + uploadDir;
+        System.out.println("Upload Dir (post files): " + uploadDir);
+        System.out.println("Upload Dir (profile images): " + uploadsDir);
 
-            System.out.println("WebConfig - Current working directory: " + currentDir);
-            System.out.println("WebConfig - Resource handler configured with path: " + resourceLocation);
+        registry.addResourceHandler("/upload/**")
+                .addResourceLocations("file:C:/Users/User/FacebookFriend/friend-finder/back-end/friend-finder/upload/")
+                .setCachePeriod(0);
 
-            registry
-                    .addResourceHandler("/uploads/**")
-                    .addResourceLocations(resourceLocation)
-                    .setCachePeriod(0);
-        }
+        registry.addResourceHandler("/uploads/**")
+                .addResourceLocations("file:" + uploadsDir)
+                .setCachePeriod(0);
+    }
 }

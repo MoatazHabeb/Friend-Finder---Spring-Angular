@@ -2,6 +2,8 @@ package com.example.friendfinder.model.clientmodel;
 
 import com.example.friendfinder.enums.Gender;
 import com.example.friendfinder.model.*;
+import com.example.friendfinder.model.userdetails.UserDetails;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -10,6 +12,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -32,7 +35,7 @@ public class Users extends UserBaseEntity {
     @Size(min = 8,message = "Must Be 8 digits or more")
     private String password;
 
-    private int active;
+    private boolean active;
 
     @NotEmpty(message = "requried")
     private String fullname;
@@ -59,30 +62,39 @@ public class Users extends UserBaseEntity {
     private List<Roles> roles;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "user")
+    @JsonIgnore
+
     private Set<Post> posts;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "user")
+    @JsonIgnore
     private Set<Comment> comments;
 
 
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "user")
+    @JsonIgnore
     private Set<React> reacts;
 
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Contact> contact;
 
 
     @OneToMany(mappedBy = "sender", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Friend> sentFriendRequests;
 
     @OneToMany(mappedBy = "receiver", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Friend> receivedFriendRequests;
 
+    @OneToOne(mappedBy = "user")
+    private UserDetails userDetails;
 
 
-
-
+    @Column(name = "last_seen")
+    private LocalDateTime lastSeen;
 
 }

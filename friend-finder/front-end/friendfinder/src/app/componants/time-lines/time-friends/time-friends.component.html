@@ -6,134 +6,90 @@
         <div class="col-md-3"></div>
         <div class="col-md-7">
 
-          <!-- Friend List
-           ================================================= -->
-          <div class="friend-list">
+
+          <!-- 🔘 Toggle Buttons -->
+
+          <div class="text-end mb-4 d-flex justify-content-end gap-2">
+            <button
+              class="tab-toggle-btn"
+              [class.active-toggle]="activeTab === 'friends'"
+              (click)="switchTab('friends')">
+              My Friends
+            </button>
+            <button
+              class="tab-toggle-btn"
+              [class.active-toggle]="activeTab === 'requests'"
+              (click)="switchTab('requests')">
+              Friend Requests
+            </button>
+            <button
+              class="tab-toggle-btn"
+              [class.active-toggle]="activeTab === 'find'"
+              (click)="switchTab('find')">
+              Find Friends
+            </button>
+          </div>
+
+          <!-- ✅ Friends List -->
+          <div class="friend-list" *ngIf="activeTab === 'friends'">
             <div class="row">
-              <div class="col-md-6 col-sm-6">
-                <div class="friend-card">
-                  <img src="assets/images/covers/1.jpg" alt="profile-cover" class="img-responsive cover">
-                  <div class="card-info">
-                    <img src="assets/images/users/user-3.jpg" alt="user" class="profile-photo-lg">
-                    <div class="friend-info">
-                      <a href="#" class="pull-right text-green">My Friend</a>
-                      <h5><a href="timeline.html" class="profile-link">Sophia Lee</a></h5>
-                      <p>Student at Harvard</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <div class="friend-card">
-                  <img src="assets/images/covers/3.jpg" alt="profile-cover" class="img-responsive cover">
-                  <div class="card-info">
-                    <img src="assets/images/users/user-4.jpg" alt="user" class="profile-photo-lg">
-                    <div class="friend-info">
-                      <a href="#" class="pull-right text-green">My Friend</a>
-                      <h5><a href="timeline.html" class="profile-link">John Doe</a></h5>
-                      <p>Traveler</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <div class="friend-card">
-                  <img src="assets/images/covers/4.jpg" alt="profile-cover" class="img-responsive cover">
-                  <div class="card-info">
-                    <img src="assets/images/users/user-10.jpg" alt="user" class="profile-photo-lg">
-                    <div class="friend-info">
-                      <a href="timeline.html" class="pull-right text-green">My Friend</a>
-                      <h5><a href="#" class="profile-link">Julia Cox</a></h5>
-                      <p>Art Designer</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <div class="friend-card">
-                  <img src="assets/images/covers/5.jpg" alt="profile-cover" class="img-responsive cover">
-                  <div class="card-info">
-                    <img src="assets/images/users/user-7.jpg" alt="user" class="profile-photo-lg">
-                    <div class="friend-info">
-                      <a href="#" class="pull-right text-green">My Friend</a>
-                      <h5><a href="timelime.html" class="profile-link">Robert Cook</a></h5>
-                      <p>Photographer at Photography</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <div class="friend-card">
-                  <img src="assets/images/covers/6.jpg" alt="profile-cover" class="img-responsive cover">
-                  <div class="card-info">
-                    <img src="assets/images/users/user-8.jpg" alt="user" class="profile-photo-lg">
-                    <div class="friend-info">
-                      <a href="#" class="pull-right text-green">My Friend</a>
-                      <h5><a href="timeline.html" class="profile-link">Richard Bell</a></h5>
-                      <p>Graphic Designer at Envato</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <div class="friend-card">
-                  <img src="assets/images/covers/7.jpg" alt="profile-cover" class="img-responsive cover">
-                  <div class="card-info">
-                    <img src="assets/images/users/user-2.jpg" alt="user" class="profile-photo-lg">
-                    <div class="friend-info">
-                      <a href="#" class="pull-right text-green">My Friend</a>
-                      <h5><a href="timeline.html" class="profile-link">Linda Lohan</a></h5>
-                      <p>Software Engineer</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <div class="friend-card">
-                  <img src="assets/images/covers/8.jpg" alt="profile-cover" class="img-responsive cover">
-                  <div class="card-info">
-                    <img src="assets/images/users/user-9.jpg" alt="user" class="profile-photo-lg">
-                    <div class="friend-info">
-                      <a href="#" class="pull-right text-green">My Friend</a>
-                      <h5><a href="timeline.html" class="profile-link">Anna Young</a></h5>
-                      <p>Musician</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <div class="friend-card">
-                  <img src="assets/images/covers/9.jpg" alt="profile-cover" class="img-responsive cover">
-                  <div class="card-info">
-                    <img src="assets/images/users/user-6.jpg" alt="user" class="profile-photo-lg">
-                    <div class="friend-info">
-                      <a href="#" class="pull-right text-green">My Friend</a>
-                      <h5><a href="timeline.html" class="profile-link">James Carter</a></h5>
-                      <p>CEO at IT Farm</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <div class="friend-card">
-                  <img src="assets/images/covers/10.jpg" alt="profile-cover" class="img-responsive cover">
-                  <div class="card-info">
-                    <img src="assets/images/users/user-5.jpg" alt="user" class="profile-photo-lg">
-                    <div class="friend-info">
-                      <a href="#" class="pull-right text-green">My Friend</a>
-                      <h5><a href="timeline.html" class="profile-link">Alexis Clark</a></h5>
-                      <p>Traveler</p>
-                    </div>
+              <div class="col-md-6 col-sm-6 mb-4" *ngFor="let friend of myFriends">
+                <div class="friend-card p-3 d-flex align-items-center shadow-sm">
+                  <img [src]="friend.image ? 'http://localhost:4050' + friend.image :  'assets/images/profile-icon-design-free-vector-300x300.jpg'"
+                       class="profile-photo-lg me-3" alt="Profile Image" />
+                  <div class="friend-info">
+                    <h5 class="mb-1">
+                      <a [routerLink]="['/profile', friend.id]" class="profile-link">
+                        {{ friend.fullname }}
+                      </a>
+                    </h5>
+                    <span class="text-success fw-semibold">My Friend</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
+          <!-- 👥 Find Friends List -->
+          <div class="friend-list" *ngIf="activeTab === 'find'">
+            <div class="row">
+              <div class="col-md-6 col-sm-6" *ngFor="let user of nonFriends">
+                <div class="friend-card p-3 d-flex align-items-center shadow-sm">
+                  <img [src]="user.image ? 'http://localhost:4050' + user.image :  'assets/images/profile-icon-design-free-vector-300x300.jpg'"
+                       class="profile-photo-lg me-3" alt="Profile Image" />
+                  <div class="friend-info">
+                    <h5><a [routerLink]="['/timelinerofile', user.id]" class="profile-link">{{ user.fullname }}</a></h5>
+                    <button class="btn btn-success btn-sm" (click)="sendRequest(user.id)">Add Friend</button>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="nonFriends.length === 0" class="text-center text-muted mt-3">
+                <em>No More Users To Add</em>
+              </div>
+            </div>
+          </div>
+
+          <!-- 🔔 Friend Requests List -->
+          <div class="friend-list mb-4" *ngIf="activeTab === 'requests'">
+            <h5 class="mb-3" style="color: black">No Friend Requests</h5>
+            <div class="row">
+              <div class="col-md-6 col-sm-6" *ngFor="let user of pendingRequests">
+                <div class="friend-card p-3 d-flex align-items-center shadow-sm">
+                  <img [src]="user.image ? 'http://localhost:4050' + user.image : 'assets/images/users/default.jpg'"
+                       class="profile-photo-lg me-3" alt="Profile Image" />
+                  <div class="friend-info">
+                    <h5 class="mb-1">{{ user.fullname }}</h5>
+                    <button class="btn btn-primary btn-sm" (click)="acceptRequest(user.id)">Accept</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
         <app-time-line-detailes></app-time-line-detailes>
+
       </div>
     </div>
-
   </div>
 </div>

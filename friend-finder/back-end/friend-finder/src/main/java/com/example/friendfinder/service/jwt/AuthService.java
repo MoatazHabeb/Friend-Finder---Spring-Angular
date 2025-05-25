@@ -6,4 +6,5 @@ import jakarta.transaction.SystemException;
 
 public interface AuthService {
     TokenDto login(UserLoginDto userLoginDto) throws SystemException;
+    void logout(); // add this
 }

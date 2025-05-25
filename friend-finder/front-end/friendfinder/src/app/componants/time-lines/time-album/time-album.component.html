@@ -5,121 +5,103 @@
       <div class="row">
         <div class="col-md-3"></div>
 
-          <div class="col-md-7">
-            <!-- Photo Album
-            ================================================= -->
-            <ul class="album-photos">
-              <li>
-                <div class="img-wrapper" data-toggle="modal" data-target=".photo-1">
-                  <img src="assets/images/album/1.jpg" alt="photo">
-                </div>
-                <div class="modal fade photo-1" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <img src="assets/images/album/1.jpg" alt="photo">
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="img-wrapper" data-toggle="modal" data-target=".photo-2">
-                  <img src="assets/images/album/2.jpg" alt="photo">
-                </div>
-                <div class="modal fade photo-2" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <img src="assets/images/album/2.jpg" alt="photo">
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="img-wrapper" data-toggle="modal" data-target=".photo-3">
-                  <img src="assets/images/album/3.jpg" alt="photo">
-                </div>
-                <div class="modal fade photo-3" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <img src="assets/images/album/3.jpg" alt="photo">
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="img-wrapper" data-toggle="modal" data-target=".photo-4">
-                  <img src="assets/images/album/4.jpg" alt="photo">
-                </div>
-                <div class="modal fade photo-4" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <img src="assets/images/album/4.jpg" alt="photo">
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="img-wrapper" data-toggle="modal" data-target=".photo-5">
-                  <img src="assets/images/album/5.jpg" alt="photo">
-                </div>
-                <div class="modal fade photo-5" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <img src="assets/images/album/5.jpg" alt="">
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="img-wrapper" data-toggle="modal" data-target=".photo-6">
-                  <img src="assets/images/album/6.jpg" alt="photo">
-                </div>
-                <div class="modal fade photo-6" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <img src="assets/images/album/6.jpg" alt="">
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="img-wrapper" data-toggle="modal" data-target=".photo-7">
-                  <img src="assets/images/album/7.jpg" alt="photo">
-                </div>
-                <div class="modal fade photo-7" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <img src="assets/images/album/7.jpg" alt="">
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="img-wrapper" data-toggle="modal" data-target=".photo-8">
-                  <img src="assets/images/album/8.jpg" alt="photo">
-                </div>
-                <div class="modal fade photo-8" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <img src="assets/images/album/8.jpg" alt="">
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="img-wrapper" data-toggle="modal" data-target=".photo-9">
-                  <img src="assets/images/album/9.jpg" alt="photo">
-                </div>
-                <div class="modal fade photo-9" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <img src="assets/images/album/9.jpg" alt="">
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
+        <div class="col-md-7">
+          <!-- Photo Album -->
+          <div *ngIf="loading" class="text-center py-4">
+            <i class="fa fa-spinner fa-spin fa-2x"></i>
+            <p>Loading your photos...</p>
           </div>
+
+          <div *ngIf="!loading" class="photo-album-container">
+            <div *ngIf="posts.length === 0" class="no-photos">
+              <p>You haven't posted any photos yet.</p>
+            </div>
+
+            <div class="album-grid">
+              <div *ngFor="let post of posts" class="album-item" (click)="openImageModal(post)">
+                <div class="img-wrapper">
+                  <img [src]="getFullImageUrl(post.image)" alt="photo" class="album-photo">
+                  <div class="photo-stats-overlay">
+                    <span><i class="fa fa-thumbs-up"></i> {{post.likes?.length || 0}}</span>
+                    <span><i class="fa fa-comment"></i> {{post.commentList?.length || 0}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <app-time-line-detailes></app-time-line-detailes>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Modal -->
+  <div class="modal-backdrop" *ngIf="selectedPost" (click)="closeImageModal()"></div>
+
+  <div class="modal" *ngIf="selectedPost" [ngClass]="{'show': selectedPost}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <div class="post-header">
+            <img [src]="getFullImageUrl(selectedPost.users?.image)" alt="Profile" class="post-author-image">
+            <div class="post-author-info">
+              <h5 class="post-author-name">{{ selectedPost.users?.fullname || 'Unknown User' }}</h5>
+              <div class="post-time">{{selectedPost.createdAt | date:'MMM d, y, h:mm a'}}</div>
+            </div>
+          </div>
+          <button type="button" class="close" (click)="closeImageModal()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-image-container">
+            <img [src]="getFullImageUrl(selectedPost.image)" alt="Post image" class="modal-image">
+          </div>
+          <p class="post-text">{{selectedPost.text}}</p>
+
+          <!-- Post Stats -->
+          <div class="post-stats">
+            <button class="stat-btn like-btn" [class.active]="selectedPost.userLiked" (click)="toggleLike(selectedPost)">
+              <i class="fa fa-thumbs-up"></i> {{selectedPost.likes?.length || 0}}
+            </button>
+            <button class="stat-btn dislike-btn" [class.active]="selectedPost.userDisliked" (click)="toggleDislike(selectedPost)">
+              <i class="fa fa-thumbs-down"></i> {{selectedPost.dislikes?.length || 0}}
+            </button>
+            <button class="stat-btn comment-btn">
+              <i class="fa fa-comment"></i> {{selectedPost.commentList?.length || 0}}
+            </button>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="comments-section">
+            <div *ngFor="let comment of selectedPost.commentList" class="comment">
+              <img [src]="getFullImageUrl(comment.user?.image)" alt="Profile" class="comment-author-image">
+              <div class="comment-content">
+                <div class="comment-header">
+                  <span class="comment-author-name">{{comment.user?.fullname || 'Unknown User'}}</span>
+                  <span class="comment-time">{{comment.createdAt | date:'MMM d, h:mm a'}}</span>
+                </div>
+                <p class="comment-text">{{comment.text}}</p>
+              </div>
+            </div>
+
+            <!-- Add Comment -->
+            <div class="add-comment">
+              <img [src]="imageUrl" alt="Profile" class="comment-author-image">
+              <div class="comment-input-container">
+                <input type="text"
+                       [(ngModel)]="selectedPost.newComment"
+                       placeholder="Write a comment..."
+                       class="comment-input"
+                       (keyup.enter)="addComment(selectedPost)">
+                <button class="comment-submit-btn" (click)="addComment(selectedPost)">
+                  <i class="fa fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

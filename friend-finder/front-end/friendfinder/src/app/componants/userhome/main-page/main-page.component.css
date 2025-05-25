@@ -1,0 +1,514 @@
+/* Dark Mode Base Styles */
+#page-contents {
+  background-color: #0a0a0a;
+  color: #e0e0e0;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; /* Modern font stack */
+}
+
+/* Post Feed Container */
+.post-feed {
+  padding: 20px 0;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* Facebook Post Styling - Dark Mode */
+.facebook-post {
+  background: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  margin-bottom: 24px;
+  border: 1px solid #2e2e2e;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.facebook-post:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Post Header */
+.post-header {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+}
+
+.post-author-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3a3a3a;
+  margin-right: 12px;
+}
+
+.post-author-info {
+  flex: 1;
+}
+
+.post-author-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.post-time {
+  font-size: 12px;
+  color: #a0a0a0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.post-time i {
+  margin-left: 6px;
+  font-size: 14px;
+}
+
+/* Post Content - Modern Text Styling */
+.post-content {
+  padding: 0 16px 12px;
+}
+
+.post-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #e0e0e0;
+  margin-bottom: 12px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* Modern text styling options */
+.post-text.modern {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+}
+
+.post-text.modern-bold {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.post-text.modern-serif {
+  font-family: 'Georgia', serif;
+  line-height: 1.8;
+}
+
+/* Image and Video Container - No White Space */
+.post-media-container {
+  margin: 0 -1px; /* Remove any potential white space */
+  border-top: 1px solid #2e2e2e;
+  border-bottom: 1px solid #2e2e2e;
+}
+
+.post-image-container,
+.post-video-container {
+  width: 100%;
+  display: block;
+  background-color: #000;
+}
+
+.post-image,
+.post-video {
+  width: 100%;
+  max-height: 600px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Fixed Position Stats Bar */
+.post-stats {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: #1a1a1a;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  border-bottom: 1px solid #2e2e2e;
+}
+
+.stat-container {
+  display: flex;
+  align-items: center;
+}
+
+.stat-btn {
+  background: transparent;
+  border: none;
+  color: #a0a0a0;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.stat-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.stat-btn i {
+  margin-right: 6px;
+  font-size: 14px;
+}
+
+.stat-btn .count {
+  margin-left: 4px;
+}
+
+.like-btn.active,
+.like-btn .count {
+  color: #2d88ff;
+}
+
+.dislike-btn.active,
+.dislike-btn .count {
+  color: #ff4d4d;
+}
+
+.comment-btn.active,
+.comment-btn .count {
+  color: #31a24c;
+}
+
+/* Reactors List - Modern Design */
+.reactors-list {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 240px;
+  max-height: 320px;
+  overflow-y: auto;
+  background: #252525;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  padding: 8px 0;
+  border: 1px solid #3a3a3a;
+  backdrop-filter: blur(10px);
+}
+
+.reactor {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  transition: background 0.2s ease;
+}
+
+.reactor:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.reactor-image {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  border: 1px solid #3a3a3a;
+}
+
+.reactor-info {
+  flex: 1;
+}
+
+.reactor-name {
+  font-size: 14px;
+  color: #e0e0e0;
+  font-weight: 500;
+}
+
+.reactor-reaction {
+  font-size: 12px;
+  color: #a0a0a0;
+  margin-top: 2px;
+}
+
+.reaction-icon {
+  margin-left: 4px;
+}
+
+.no-reactors {
+  color: #a0a0a0;
+  font-style: italic;
+  font-size: 13px;
+  text-align: center;
+  padding: 16px;
+}
+
+/* Post Actions - Modern Buttons */
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 16px;
+  background: #1a1a1a;
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  border-top: 1px solid #2e2e2e;
+}
+
+.action-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #a0a0a0;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 4px;
+}
+
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.action-btn i {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.action-btn.like-btn.active {
+  color: #2d88ff;
+}
+
+.action-btn.dislike-btn.active {
+  color: #ff4d4d;
+}
+
+.action-btn.comment-btn.active {
+  color: #31a24c;
+}
+
+.action-btn.share-btn.active {
+  color: #f7b928;
+}
+
+/* Comments Section - Modern Design */
+.comments-section {
+  padding: 12px 16px;
+  background: #1e1e1e;
+  border-top: 1px solid #2e2e2e;
+}
+
+.comment {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.comment-author-image {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  border: 1px solid #3a3a3a;
+  flex-shrink: 0;
+}
+
+.comment-content {
+  flex: 1;
+  background: #252525;
+  border-radius: 18px;
+  padding: 12px 16px;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.comment-author-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e0e0e0;
+  margin-right: 8px;
+}
+
+.comment-time {
+  font-size: 12px;
+  color: #a0a0a0;
+}
+
+.comment-text {
+  font-size: 14px;
+  color: #e0e0e0;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.comment-actions {
+  display: flex;
+  margin-top: 8px;
+}
+
+.comment-action {
+  font-size: 12px;
+  color: #a0a0a0;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.comment-action:hover {
+  color: #ffffff;
+}
+
+/* Add Comment - Modern Input */
+.add-comment {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.comment-input-container {
+  flex: 1;
+  position: relative;
+  background: #252525;
+  border-radius: 18px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #3a3a3a;
+}
+
+.comment-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #e0e0e0;
+  font-size: 14px;
+  outline: none;
+  padding-right: 40px;
+  font-family: 'Inter', sans-serif;
+}
+
+.comment-input::placeholder {
+  color: #6d6d6d;
+}
+
+.comment-submit-btn {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #2d88ff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.comment-submit-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Special Post Text Style - Modern Neon */
+.post-text.neon-effect {
+  background-color: #000000;
+  color: #00ffea;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow:
+    0 0 10px rgba(0, 255, 234, 0.3),
+    inset 0 0 10px rgba(0, 168, 159, 0.3);
+  text-shadow: 0 0 5px rgba(0, 221, 224, 0.5);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(0, 255, 234, 0.1);
+  margin: 12px 0;
+  font-family: 'Courier New', monospace;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .post-feed {
+    padding: 12px;
+  }
+
+  .facebook-post {
+    border-radius: 8px;
+  }
+
+  .post-image, .post-video {
+    max-height: 400px;
+  }
+
+  .post-text {
+    font-size: 14px;
+  }
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.facebook-post {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Loading Indicator */
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+}
+
+.loading-spinner {
+  color: #2d88ff;
+  font-size: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* No Posts Styling */
+.no-posts {
+  text-align: center;
+  padding: 40px 20px;
+  color: #a0a0a0;
+  background: #1a1a1a;
+  border-radius: 12px;
+  margin: 20px 0;
+  border: 1px dashed #3a3a3a;
+}
+
+.no-posts i {
+  font-size: 32px;
+  margin-bottom: 16px;
+  color: #3a3a3a;
+}
+
+.no-posts h3 {
+  margin: 0 0 8px;
+  font-weight: 500;
+}
+
+.no-posts p {
+  margin: 0;
+  font-size: 14px;
+}

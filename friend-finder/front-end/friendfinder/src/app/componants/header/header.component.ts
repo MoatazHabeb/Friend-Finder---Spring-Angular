@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "../../../service/auth/auth.service";
+import {HttpClient} from "@angular/common/http";
+import {NgModel} from "@angular/forms";
 
 @Component({
   selector: 'app-header',
@@ -8,15 +10,62 @@ import {AuthService} from "../../../service/auth/auth.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  searchKey: string = '';
+  @ViewChild('searchInput', { static: false }) searchInput!: ElementRef;
+  @ViewChild('searchModel', { static: false }) searchModel!: NgModel;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private http: HttpClient
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  performSearch(): void {
+    console.log('Perform search called with:', this.searchKey);
+
+    if (!this.searchKey || !this.searchKey.trim()) {
+      console.log('Search term is empty');
+      return;
+    }
+
+    const searchTerm = encodeURIComponent(this.searchKey.trim());
+    console.log('Navigating to search with term:', searchTerm);
+
+    this.router.navigate(['/search', searchTerm]).then(navigationSuccess => {
+      console.log('Navigation success:', navigationSuccess);
+      if (navigationSuccess) {
+        this.searchKey = '';
+        if (this.searchModel) {
+          this.searchModel.reset();
+        }
+      }
+    }).catch(err => {
+      console.error('Navigation error:', err);
+    });
   }
-  // tslint:disable-next-line:typedef
-  logOut() {
-    sessionStorage.removeItem('token');
-    this.router.navigateByUrl('/login'); // rice
+
+  onSearchEnter(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      this.performSearch();
+    }
+  }
+
+
+  logout(): void {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigateByUrl('/login').then(() => {
+          window.location.reload(); // Only if absolutely necessary
+        });
+      },
+      error: () => {
+        this.router.navigateByUrl('/login').then(() => {
+          window.location.reload(); // Only if absolutely necessary
+        });
+      }
+    });
   }
 
   // tslint:disable-next-line:typedef

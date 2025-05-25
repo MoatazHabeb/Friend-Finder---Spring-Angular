@@ -11,7 +11,9 @@ export class ProfileService {
   constructor(private http: HttpClient) { }
 
   private cachedProfile: any = null;
-
+  getUserProfileById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/getprofile/${id}`);
+  }
 // Get My Profile
   getUserProfile(forceReload = false): Observable<any> {
     if (this.cachedProfile && !forceReload) {

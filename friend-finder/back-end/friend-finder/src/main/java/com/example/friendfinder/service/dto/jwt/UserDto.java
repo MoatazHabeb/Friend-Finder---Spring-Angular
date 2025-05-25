@@ -36,4 +36,10 @@ public class UserDto {
     private Gender gender;
     private String image; // Optional
     private List<RolesDto> roles;
+
+    public UserDto(Long id, String fullname, String image) {
+        this.id = id;
+        this.fullname = fullname;
+        this.image = image;
+    }
 }

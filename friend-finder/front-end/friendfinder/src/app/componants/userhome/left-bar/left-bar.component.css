@@ -1,0 +1,259 @@
+/* Modern Dark Theme - Sidebar */
+.sidebar-container {
+  position: static;
+  height: 100vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Profile Card */
+.profile-card {
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  border: 1px solid #2e2e2e;
+  transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+.profile-banner {
+  height: 80px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.profile-content {
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.profile-photo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 4px solid #1e1e1e;
+  object-fit: cover;
+  margin-top: -50px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.profile-photo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+.profile-info {
+  margin-top: 15px;
+}
+
+.profile-name {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.profile-name:hover {
+  color: #667eea;
+}
+
+.friend-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #9e9e9e;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.friend-count i {
+  color: #4caf50;
+  font-size: 16px;
+}
+
+/* Modern Navigation */
+.modern-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #2e2e2e;
+}
+
+.modern-nav li {
+  padding: 0;
+  margin: 0;
+  transition: all 0.3s ease;
+}
+
+.modern-nav li:hover {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.modern-nav li.active {
+  background: rgba(102, 126, 234, 0.2);
+  border-left: 4px solid #667eea;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  color: #e0e0e0;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  gap: 15px;
+}
+
+.nav-item i {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+  color: #667eea;
+}
+
+.modern-nav li.active .nav-item i {
+  color: #ffffff;
+}
+
+/* Chat Block */
+.chat-block {
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid #2e2e2e;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: rgba(102, 126, 234, 0.2);
+  border-bottom: 1px solid #2e2e2e;
+}
+
+.chat-header h3 {
+  color: #ffffff;
+  font-size: 16px;
+  margin: 0;
+}
+
+.chat-header i {
+  color: #9e9e9e;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.chat-header i:hover {
+  color: #ffffff;
+}
+
+.online-users {
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Custom Scrollbar */
+.online-users::-webkit-scrollbar {
+  width: 6px;
+}
+
+.online-users::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+.online-users::-webkit-scrollbar-thumb {
+  background: #667eea;
+  border-radius: 3px;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.user-item:hover {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.user-avatar {
+  position: relative;
+  margin-right: 12px;
+}
+
+.user-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3a3a3a;
+}
+
+.online-indicator {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background: #4caf50;
+  border-radius: 50%;
+  border: 2px solid #1e1e1e;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.user-status {
+  color: #9e9e9e;
+  font-size: 12px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.profile-card, .modern-nav, .chat-block {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .sidebar-container {
+    height: auto;
+    padding-right: 0;
+  }
+
+  .chat-block {
+    position: static;
+    width: auto;
+  }
+}

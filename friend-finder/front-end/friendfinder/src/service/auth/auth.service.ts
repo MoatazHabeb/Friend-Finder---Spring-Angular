@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {Observable, throwError} from "rxjs";
-import {catchError, map} from "rxjs/operators";
+import {BehaviorSubject, Observable, throwError} from "rxjs";
+import {catchError, map, tap} from "rxjs/operators";
+import {UserDto} from "../../model/user-dto";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
+  apiUrl= 'http://localhost:4050';
   baseUrl = 'http://localhost:4050/user'; // /create-client   //login
+  currentUser: any;  // or BehaviorSubject
   constructor(private http: HttpClient) { }
+  private currentUserSubject = new BehaviorSubject<any>(null);
+  currentUser$ = this.currentUserSubject.asObservable();
 
   createAccount(name: string, email: string, phoneNumber: string, password: string, age: string, gender: string): Observable<any> {
     // ✅ Client-side password validation
@@ -66,4 +70,33 @@ export class AuthService {
       return false;
     }
   }
+  getCurrentUser(): Observable<any> {
+    return this.http.get('http://localhost:4050/user/me').pipe(
+      tap(user => this.currentUserSubject.next(user)),
+      catchError(error => {
+        this.clearUserState();
+        return throwError(error);
+      })
+    );
+  }
+
+  getOnlineUsers(): Observable<UserDto[]> {
+    return this.http.get<UserDto[]>(`${this.apiUrl}/user/online-users`);
+  }
+  logout(): Observable<any> {
+    return this.http.post('http://localhost:4050/user/logout', {}).pipe(
+      tap(() => this.clearUserState()),
+      catchError(error => {
+        this.clearUserState(); // Still clear state even if logout API fails
+        return throwError(error);
+      })
+    );
+  }
+
+  clearUserState() {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('roles');
+    this.currentUserSubject.next(null);
+  }
+
 }

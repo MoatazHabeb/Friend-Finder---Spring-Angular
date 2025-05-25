@@ -32,7 +32,9 @@ export class SignUpComponent implements OnInit {
       toggle.textContent = '👁️';
     }
   }
-
+  login() {
+    this.router.navigateByUrl('/login'); // rice
+  }
   // tslint:disable-next-line:typedef
   disablePaste(event: ClipboardEvent) {
     event.preventDefault();

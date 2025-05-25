@@ -15,11 +15,10 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (this.authService.isUserLogIn()) {
+    const token = sessionStorage.getItem('token');
+    if (token) {
       request = request.clone({
-        setHeaders: {
-          Authorization: sessionStorage.getItem('token')
-        }
+        setHeaders: { Authorization: token }
       });
     }
     return next.handle(request);

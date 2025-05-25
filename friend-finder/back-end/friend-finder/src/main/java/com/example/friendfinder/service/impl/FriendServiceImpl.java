@@ -5,10 +5,15 @@ import com.example.friendfinder.model.clientmodel.Users;
 import com.example.friendfinder.repo.FriendRepository;
 import com.example.friendfinder.repo.jwt.UserRepository;
 import com.example.friendfinder.service.FriendService;
+import com.example.friendfinder.service.dto.FriendUserDto;
+import com.example.friendfinder.service.dto.jwt.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FriendServiceImpl implements FriendService {
@@ -35,26 +40,77 @@ public class FriendServiceImpl implements FriendService {
         friendRepository.save(request);
     }
     @Override
-    public void acceptFriendRequest(Long requestId, Long receiverId) {
-        Friend request = friendRepository.findById(requestId).orElseThrow();
+    @Transactional
+    public void acceptFriendRequest(Long senderId, Long receiverId) {
+        Users sender = userRepository.findById(senderId)
+                .orElseThrow(() -> new IllegalArgumentException("Sender not found with ID: " + senderId));
 
-        if (!request.getReceiver().getId().equals(receiverId)) {
-            throw new RuntimeException("Unauthorized to accept this request");
-        }
+        Users receiver = userRepository.findById(receiverId)
+                .orElseThrow(() -> new IllegalArgumentException("Receiver not found with ID: " + receiverId));
+
+        Friend request = friendRepository.findBySenderAndReceiverAndAcceptedFalse(sender, receiver);
 
         request.setAccepted(true);
         friendRepository.save(request);
     }
 
     @Override
-    public List<Friend> getPendingRequests(Long userId) {
+    public List<FriendUserDto> getPendingRequests(Long userId) {
         Users user = userRepository.findById(userId).orElseThrow();
-        return friendRepository.findByReceiverAndAcceptedFalse(user);
+        List<Friend> pendingRequests = friendRepository.findByReceiverAndAcceptedFalse(user);
+
+        return pendingRequests.stream()
+                .map(friend -> {
+                    Users sender = friend.getSender();
+                    return new FriendUserDto(sender.getId(), sender.getFullname(), sender.getImage());
+                })
+                .toList();
     }
     @Override
-    public List<Friend> getFriends(Long userId) {
+    public List<FriendUserDto> getFriends(Long userId) {
         Users user = userRepository.findById(userId).orElseThrow();
-        return friendRepository.findBySenderOrReceiverAndAcceptedTrue(user, user);
+
+        List<Friend> acceptedFriends = friendRepository.findAcceptedFriendsByUser(user);
+
+        return acceptedFriends.stream()
+                .map(friend -> {
+                    Users friendUser = friend.getSender().getId().equals(userId)
+                            ? friend.getReceiver()
+                            : friend.getSender();
+
+                    return new FriendUserDto(
+                            friendUser.getId(),
+                            friendUser.getFullname(),
+                            friendUser.getImage()
+                    );
+                })
+                .distinct()
+                .collect(Collectors.toList());
     }
+    @Override
+    public Long countFriends(Long userId) {
+        Users user = userRepository.findById(userId).orElseThrow();
+
+        List<Friend> acceptedFriends = friendRepository.findAcceptedFriendsByUser(user);
+
+        return acceptedFriends.stream()
+                .map(friend -> friend.getSender().getId().equals(userId)
+                        ? friend.getReceiver().getId()
+                        : friend.getSender().getId())
+                .distinct()
+                .count();
+    }
+
+    @Override
+    public boolean isHeaFriend(Users userss, Long receiverid) {
+        Optional<Users> receiverusers = userRepository.findById(receiverid);
+        if (receiverusers.isEmpty()) {
+            return false;
+        }
+        Users rusers = receiverusers.get();
+
+        return friendRepository.existsBySenderAndReceiverAndAcceptedTrue(userss, rusers) || friendRepository.existsBySenderAndReceiverAndAcceptedTrue(rusers,userss) ;
+    }
+
 
 }

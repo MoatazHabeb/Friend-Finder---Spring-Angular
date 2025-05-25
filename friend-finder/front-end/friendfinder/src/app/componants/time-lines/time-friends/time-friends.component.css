@@ -1,0 +1,200 @@
+/* Top-level Friend List Margin */
+.friend-list {
+  margin-top: 20px;
+}
+
+/* Friend Card Styling */
+.friend-card {
+  background-color: #2a2a2a; /* Dark background for a sleek look */
+  border: 1px solid #444; /* Subtle border */
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Stronger, deeper shadow */
+  position: relative; /* Needed for pseudo-elements if added later */
+  overflow: hidden; /* Ensures content stays within rounded borders */
+}
+
+.friend-card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6); /* More pronounced shadow on hover */
+  background-color: #333; /* Slightly lighter on hover */
+}
+
+#page-contents {
+  background: radial-gradient(circle at top left, #a2a2ca 0%, #9797bf 100%) !important;
+  min-height: 100vh !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  color: #f0f0f0 !important;
+  line-height: 1.6 !important;
+}
+
+/* Profile Image */
+.profile-photo-lg {
+  width: 90px; /* Slightly smaller for a more compact card */
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 25px;
+  border: 3px solid #00c4cc; /* Vibrant cyan border */
+  box-shadow: 0 0 15px rgba(0, 196, 204, 0.6); /* Matching glow effect */
+  flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+/* Friend Info Styling */
+.friend-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1; /* Allows info to take available space */
+}
+
+.friend-info h5 {
+  margin: 0 0 8px 0;
+  font-weight: 700;
+  font-size: 1.4rem; /* Slightly larger font */
+  color: #e0f7fa; /* Light cyan for names */
+  letter-spacing: 0.5px;
+}
+
+.friend-info p {
+  margin: 0;
+  color: #bbb; /* Lighter text for additional info */
+}
+
+/* Friend Link */
+.profile-link {
+  color: #e0f7fa; /* Matches h5 color */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.profile-link:hover {
+  color: #00c4cc; /* Cyan on hover */
+  text-decoration: underline;
+}
+
+/* Friend Action Button (Add, Accept) */
+.friend-info button {
+  padding: 8px 20px; /* More generous padding */
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px; /* Slightly rounded corners */
+  margin-top: 10px; /* Space between name and button */
+  font-weight: 600;
+  transition: all 0.3s ease;
+  min-width: 120px; /* Ensure consistent button width */
+}
+
+.friend-info .btn-success { /* Add Friend button */
+  background: linear-gradient(145deg, #28a745, #218838); /* Green gradient */
+  border: none;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+}
+
+.friend-info .btn-success:hover {
+  background: linear-gradient(145deg, #218838, #28a745);
+  box-shadow: 0 6px 15px rgba(40, 167, 69, 0.5);
+  transform: translateY(-2px);
+}
+
+.friend-info .btn-primary { /* Accept button */
+  background: linear-gradient(145deg, #007bff, #0056b3); /* Blue gradient */
+  border: none;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+.friend-info .btn-primary:hover {
+  background: linear-gradient(145deg, #0056b3, #007bff);
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.text-success.fw-semibold { /* "My Friend" status */
+  color: #00c4cc !important; /* Make it match the cyan accent */
+  font-weight: 700 !important;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+}
+
+/* Wrapper for image + text */
+.card-info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: visible;
+}
+
+/* No Users Left Message */
+.text-center.text-muted {
+  font-style: italic;
+  color: #bbb; /* Lighter color for visibility on dark background */
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Toggle Button Margin */
+.find-friends-button {
+  margin-top: 100px; /* Keep as is */
+}
+
+/* Responsive Support */
+@media (max-width: 991px) {
+  .friend-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-photo-lg {
+    margin-bottom: 15px;
+    margin-right: 0;
+  }
+}
+
+/*Buttons*/
+.tab-toggle-btn {
+  background: linear-gradient(145deg, #2c3e50, #4ca1af); /* dark teal-blue gradient */
+  color: #cbd5e0; /* soft light blue-gray */
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  box-shadow:
+    0 5px 15px rgba(76, 161, 175, 0.4), /* glow */
+    inset 0 -3px 5px rgba(255, 255, 255, 0.1); /* subtle inset light */
+  cursor: pointer;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease,
+    transform 0.3s ease,
+    box-shadow 0.4s ease;
+}
+
+.tab-toggle-btn:hover {
+  background: linear-gradient(145deg, #4ca1af, #2c3e50);
+  color: #e0f7fa;
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 25px rgba(76, 161, 175, 0.6),
+    inset 0 -3px 5px rgba(255, 255, 255, 0.15);
+}
+
+.tab-toggle-btn.active-toggle {
+  background: linear-gradient(145deg, #0d6efd, #3a8dff);
+  color: #ffffff;
+  box-shadow:
+    0 10px 30px rgba(13, 110, 253, 0.7),
+    inset 0 -4px 8px rgba(255, 255, 255, 0.25);
+  transform: translateY(-4px);
+}

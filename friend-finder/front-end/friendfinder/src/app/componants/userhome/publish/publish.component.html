@@ -1,24 +1,26 @@
+<div class="post-input-wrapper">
+  <!-- User Avatar -->
+  <img [src]="user?.image || 'assets/images/profile-icon-design-free-vector-300x300.jpg'" alt="User avatar" class="avatar" />
 
-<!-- Post Create Box
-           ================================================= -->
-<div class="create-post">
-  <div class="row">
-    <div class="col-md-7 col-sm-7">
-      <div class="form-group">
-        <img src="assets/images/users/user-1.jpg" alt="" class="profile-photo-md" />
-        <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
-      </div>
-    </div>
-    <div class="col-md-5 col-sm-5">
-      <div class="tools">
-        <ul class="publishing-tools list-inline">
-          <li><a href="#"><i class="ion-compose"></i></a></li>
-          <li><a href="#"><i class="ion-images"></i></a></li>
-          <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
-          <li><a href="#"><i class="ion-map"></i></a></li>
-        </ul>
-        <button class="btn btn-primary pull-right">Publish</button>
-      </div>
-    </div>
+  <!-- Textarea -->
+  <textarea [(ngModel)]="postText"
+            rows="1"
+            class="post-textarea"
+            [placeholder]="'What are you thinking, ' + (user?.fullname || '') + '?'"></textarea>
+
+  <!-- Upload buttons container -->
+  <div class="upload-buttons">
+    <label class="upload-btn" title="Upload Photo">
+      <i class="ion-images"></i>
+      <input type="file" accept="image/*" (change)="onFileSelected($event)" class="file-input" />
+    </label>
+
+    <label class="upload-btn" title="Upload Video">
+      <i class="ion-ios-videocam"></i>
+      <input type="file" accept="video/*" (change)="onFileSelected($event)" class="file-input" />
+    </label>
   </div>
-</div><!-- Post Create Box End -->
+
+  <!-- Post button -->
+  <button class="btn-post" (click)="onPublish()">Post</button>
+</div>

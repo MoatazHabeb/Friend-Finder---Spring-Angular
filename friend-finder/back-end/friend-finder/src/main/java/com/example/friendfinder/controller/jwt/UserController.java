@@ -1,5 +1,5 @@
 package com.example.friendfinder.controller.jwt;
-
+import java.util.List;
 import com.example.friendfinder.config.WebConfig;
 import com.example.friendfinder.mapper.UserMapper;
 import com.example.friendfinder.model.clientmodel.Users;
@@ -34,6 +34,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
@@ -54,6 +55,26 @@ public class UserController {
     ResponseEntity<TokenDto> login(@RequestBody UserLoginDto userLoginDto) throws SystemException {
 
         return ResponseEntity.ok(authService.login(userLoginDto));
+    }
+    @GetMapping("/me")
+    public ResponseEntity<UserDto> getCurrentUser() {
+        return ResponseEntity.ok(userService.getMyProfile());
+    }
+    @PostMapping("/logout")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<String> logout() {
+        authService.logout();
+        return ResponseEntity.ok("Logged out successfully.");
+    }
+
+    @GetMapping("/online-users")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<List<UserDto>> getOnlineUsers() {
+        List<Users> users = userRepository.findByActiveTrue();
+        List<UserDto> dtos = users.stream()
+                .map(UserMapper.USER_MAPPER::toDto)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(dtos);
     }
 
 
@@ -124,6 +145,13 @@ public class UserController {
         logger.info("Returning profile with image URL: " + profile.getImage());
 
         return ResponseEntity.ok(profile);
+    }
+
+    @GetMapping("/getprofile/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<UserDto> getProfile(@PathVariable Long id) {
+
+        return ResponseEntity.ok(userService.getProfile(id));
     }
 
 

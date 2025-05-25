@@ -1,0 +1,65 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+<div class="timeline-cover">
+  <div class="cover-overlay"></div>
+  <div class="container">
+    <div class="profile-header">
+      <!-- Profile Image & Change Photo -->
+      <div class="profile-avatar">
+        <div class="avatar-wrapper">
+          <img [src]="user?.image ? 'http://localhost:4050' + user.image :  'assets/images/profile-icon-design-free-vector-300x300.jpg'" class="avatar-img" alt="User Image">
+          <div class="avatar-glow"></div>
+        </div>
+      </div>
+
+      <!-- Profile Info -->
+      <div class="profile-details">
+        <div class="profile-badge">
+          <h1 class="profile-name">
+            {{ user?.fullname || 'User' }}
+            <span *ngIf="isFriend" class="friend-badge">
+              <i class="bi bi-person-check-fill"></i> Friend
+            </span>
+          </h1>
+
+          <div class="profile-meta">
+            <span class="meta-item">
+              <i class="bi bi-gender-ambiguous"></i> {{ user?.gender }}
+            </span>
+            <span class="meta-separator">•</span>
+            <span class="meta-item">
+              <i class="bi bi-cake"></i> {{ user?.age }} years
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="profile-nav">
+      <ul class="nav-links">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/time', user?.id]" routerLinkActive="active">
+            <i class="bi bi-house-door"></i> Timeline
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/about', user.id]" routerLinkActive="active">
+            <i class="bi bi-file-person"></i> About
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/album', user.id]" routerLinkActive="active">
+            <i class="bi bi-images"></i> Album
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/friends', user?.id]" routerLinkActive="active">
+            <i class="bi bi-people"></i> Friends
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
